@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StoreBL\StoreBL.csproj" />
+    <ProjectReference Include="..\StoreDL\StoreDL.csproj" />
+    <ProjectReference Include="..\StoreModels\StoreModels.csproj" />
   </ItemGroup>
 
 
