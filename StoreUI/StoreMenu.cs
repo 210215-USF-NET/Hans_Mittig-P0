@@ -83,5 +83,9 @@ namespace StoreUI
         {Console.WriteLine("Thank you for coming, see you again soon!");}
 
         public void SearchCustomer(){}
+
+        public void ViewLocation(){}
+
+        public void PlaceOrder(){}
     }
 }
