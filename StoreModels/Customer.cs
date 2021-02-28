@@ -19,7 +19,7 @@ namespace StoreModels
         }
     }
 
-        public override string ToString() => $"Customer Details: \n\t name: {this.CustomerName.ToString()}";
+        public override string ToString() => $"{this.CustomerName.ToString()} was found in the system.";
 
     }
 }

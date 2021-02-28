@@ -41,7 +41,7 @@ namespace StoreUI
                     }
                     break;
                 case "1":
-                    //GetHeroes();
+                    SearchCustomer();
                     break;
                 case "2":
                     stay = false;
@@ -82,7 +82,19 @@ namespace StoreUI
         public void ExitRemarks()
         {Console.WriteLine("Thank you for coming, see you again soon!");}
 
-        public void SearchCustomer(){}
+        public void SearchCustomer()
+        {
+            Console.WriteLine("Please enter a full name to search by: ");
+            Customer found = _strBL.GetCustomerName(Console.ReadLine());
+            if(found == null)
+            {
+                Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
+            }
+            else
+            {
+                Console.WriteLine(found.ToString());
+            }
+        }
 
         public void ViewLocation(){}
 

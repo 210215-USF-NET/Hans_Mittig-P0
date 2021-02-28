@@ -7,5 +7,6 @@ namespace StoreDL
          List<Customer> GetCustomers();
 
          Customer AddCustomer(Customer newCustomer);
+         Customer GetCustomerName(string name);
     }
 }
