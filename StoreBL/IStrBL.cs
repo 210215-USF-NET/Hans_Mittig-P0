@@ -9,5 +9,7 @@ namespace StoreBL
          void AddCustomer(Customer newCustomer);
 
          Customer GetCustomerName(string name);
+
+         Customer CustomerSignIn(string password);
     }
 }

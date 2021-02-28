@@ -8,5 +8,7 @@ namespace StoreDL
 
          Customer AddCustomer(Customer newCustomer);
          Customer GetCustomerName(string name);
+
+         Customer CustomerSignIn(string password);
     }
 }

@@ -33,7 +33,7 @@ namespace StoreUI
             .Options;
             
             using var context = new StoreDBContext(options);
-            IMenu menu = new StoreMenu(new StrBL(new CustomerRepoDB(context, new CustomerMapper())));
+            IMenu menu = new StoreMenu(new StrBL(new CustomerRepoDB(context, new StoreMapper())));
             menu.Start();
         }
     }

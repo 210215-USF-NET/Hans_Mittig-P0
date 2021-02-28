@@ -32,5 +32,10 @@ namespace StoreDL
         {
             return _context.Customers.Select(x => _mapper.ParseCustomer(x)).ToList().FirstOrDefault(x => x.CustomerName == name);
         }
+
+        public Customer CustomerSignIn(string password)
+        {
+            return _context.Customers.Select(x => _mapper.ParseCustomer(x)).ToList().FirstOrDefault(x => x.CustomerPassword == password);
+        }
     }
 }

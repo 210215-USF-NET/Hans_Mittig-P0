@@ -64,7 +64,7 @@ CREATE TABLE OrderItems
 
 
 --Adding seed data
-INSERT INTO customers (name) VALUES
+INSERT INTO customers (name, password) VALUES
 ('Hans Mittig', 'Password123'), ('Zach French','password123');
 
 INSERT INTO location (address) VALUES
@@ -73,7 +73,7 @@ INSERT INTO location (address) VALUES
 INSERT INTO product (name, description, price) VALUES 
 ('Laptop','HP', 499.99), ('PC','DELL', 1000.99), ('Tablet', 'SAMSUNG', 299.99);
 
-INSERT INTO managers (name) VALUES
+INSERT INTO managers (name, password) VALUES
 ('Marielle Nolasco','Manager123');
 
 INSERT INTO inventory (nameOfInventory, quantity, productid, locationid) VALUES

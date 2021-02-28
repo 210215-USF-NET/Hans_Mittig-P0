@@ -46,18 +46,18 @@ namespace StoreUI
                     SearchCustomer();
                     break;
                 case "2":
-                    stay = false;
-                    ExitRemarks();
+                    PlaceOrder();
                     break;
                 case "3":
-                    stay = false;
-                    ExitRemarks();
+                    //ViewOrders();
                     break;
                 case "4":
-                    stay = false;
-                    ExitRemarks();
+                    //ViewLocationOrders
                     break;
                 case "5":
+                    //ReplenishInventory
+                    break;
+                case "6":
                     stay = false;
                     ExitRemarks();
                     break;
@@ -66,7 +66,7 @@ namespace StoreUI
                     break;
             }
             
-            }while (stay);
+              }while (stay);
 
         }
 
@@ -86,22 +86,44 @@ namespace StoreUI
         public void ExitRemarks()
         {Console.WriteLine("Thank you for coming, see you again soon!");}
 
-        public void SearchCustomer()
+        public Boolean SearchCustomer()
         {
             Console.WriteLine("Please enter a full name to search by: ");
             Customer found = _strBL.GetCustomerName(Console.ReadLine());
-            if(found == null)
+            if(found != null)
             {
-                Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
+                Console.WriteLine(found.ToString());
+                return true;
             }
             else
             {
-                Console.WriteLine(found.ToString());
+                Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
+                return false;
             }
         }
 
         public void ViewLocation(){}
 
-        public void PlaceOrder(){}
+        public void PlaceOrder()
+        {
+            CustomerLogin();
+        }
+
+        public void CustomerLogin()
+        {   
+            if(SearchCustomer()) 
+            {
+                Console.WriteLine("Please enter a password for the specified user: ");
+                Customer foundpass = _strBL.CustomerSignIn(Console.ReadLine());
+                if(foundpass != null)
+                {
+                    Console.WriteLine("Login successful, please wait a moment...");
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, the specified name and password combo do not match our records. Please try again.");
+                }
+            }
+        }
     }
 }

@@ -27,5 +27,10 @@ namespace StoreBL
         {
             return _repo.GetCustomerName(name);
         }
+
+        public Customer CustomerSignIn(string password)
+        {
+            return _repo.CustomerSignIn(password);
+        }
     }
 }

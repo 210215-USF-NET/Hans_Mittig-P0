@@ -32,7 +32,7 @@ namespace StoreModels
         }
     }
 
-        public override string ToString() => $"{this.CustomerName.ToString()} was found in the system.";
+        public override string ToString() => $"The customer {this.CustomerName.ToString()} was found in the system.";
 
     }
 }

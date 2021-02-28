@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace StoreDL
 {
-    public class CustomerMapper : IMapper
+    public class StoreMapper : IMapper
     {
         public Model.Customer ParseCustomer(Entity.Customer customer)
         {
