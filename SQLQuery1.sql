@@ -5,12 +5,22 @@ DROP TABLE inventory;
 DROP TABLE location;
 DROP TABLE customers;
 DROP TABLE product;
+DROP TABLE managers;
 
 --creating tables
 CREATE TABLE Customers
 (
 	id INT IDENTITY PRIMARY KEY,
-	NAME VARCHAR(50) not null,
+	name VARCHAR(50) not null,
+	password VARCHAR(50) not null,
+);
+
+CREATE TABLE managers
+(
+	id INT IDENTITY PRIMARY KEY,
+	name VARCHAR(50) not null,
+	password VARCHAR(50) not null,
+
 );
 
 CREATE TABLE Location
@@ -55,13 +65,16 @@ CREATE TABLE OrderItems
 
 --Adding seed data
 INSERT INTO customers (name) VALUES
-('Hans Mittig'), ('Zach French');
+('Hans Mittig', 'Password123'), ('Zach French','password123');
 
 INSERT INTO location (address) VALUES
 ('Ossining, NY'), ('Arlington, TX'), ('Los Angeles, CA');
 
 INSERT INTO product (name, description, price) VALUES 
 ('Laptop','HP', 499.99), ('PC','DELL', 1000.99), ('Tablet', 'SAMSUNG', 299.99);
+
+INSERT INTO managers (name) VALUES
+('Marielle Nolasco','Manager123');
 
 INSERT INTO inventory (nameOfInventory, quantity, productid, locationid) VALUES
 ('Tablet Stock', 20, 3, 1), ('Laptop Stock', 15, 1, 1), ('PC Stock', 10, 2, 1),
@@ -80,6 +93,8 @@ SELECT * FROM customers;
 SELECT * FROM location;
 
 SELECT * FROM product;
+
+SELECT * FROM managers;
 
 SELECT * FROM orders;
 

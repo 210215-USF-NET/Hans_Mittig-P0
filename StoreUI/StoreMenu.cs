@@ -20,9 +20,11 @@ namespace StoreUI
             Console.WriteLine("Welcome to my electronics store. What would you like to do?");
             Console.WriteLine("[0] Add customer");
             Console.WriteLine("[1] Search for Customer");
-            Console.WriteLine("[2] View location(s)");
-            Console.WriteLine("[4] Place order");
-            Console.WriteLine("[5] Exit");
+            Console.WriteLine("[2] Place order");
+            Console.WriteLine("[3] View order history");
+            Console.WriteLine("[4] View location order history (Manager only)");
+            Console.WriteLine("[5] Replenish inventory");
+            Console.WriteLine("[6] Exit");
 
             // get user input
             Console.WriteLine("Enter a number: ");
@@ -74,6 +76,8 @@ namespace StoreUI
             Customer newCustomer = new Customer();
             Console.WriteLine("Enter Customer's full name: ");
             newCustomer.CustomerName = Console.ReadLine();
+            Console.WriteLine("Enter a password for the new customer: ");
+            newCustomer.CustomerPassword = Console.ReadLine();
 
             _strBL.AddCustomer(newCustomer);
             Console.WriteLine("Customer registered successfully.");

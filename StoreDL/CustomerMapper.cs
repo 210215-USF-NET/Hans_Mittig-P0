@@ -12,7 +12,8 @@ namespace StoreDL
         {
             return new Model.Customer
             {
-                CustomerName = customer.Name
+                CustomerName = customer.Name,
+                CustomerPassword = customer.Password
             };
         }
 
@@ -20,7 +21,8 @@ namespace StoreDL
         {
             return new Entity.Customer
             {
-                Name = customer.CustomerName
+                Name = customer.CustomerName,
+                Password = customer.CustomerPassword
             };
         }
     }
