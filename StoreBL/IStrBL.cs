@@ -11,5 +11,10 @@ namespace StoreBL
          Customer GetCustomerName(string name);
 
          Customer CustomerSignIn(string password);
+
+         List<Location> ViewLoc();
+
+         Location ChooseLoc(string location);
+
     }
 }

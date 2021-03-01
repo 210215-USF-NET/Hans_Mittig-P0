@@ -25,5 +25,21 @@ namespace StoreDL
                 Password = customer.CustomerPassword
             };
         }
+
+        public Model.Location ParseLocation(Entity.Location location)
+        {
+            return new Model.Location
+            {
+                LocationName = location.Address
+            };
+        }
+
+        public Entity.Location ParseLocation(Model.Location location)
+        {
+            return new Entity.Location
+            {
+                Address = location.LocationName
+            };
+        }
     }
 }

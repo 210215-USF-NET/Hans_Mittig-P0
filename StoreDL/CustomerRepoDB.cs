@@ -37,5 +37,16 @@ namespace StoreDL
         {
             return _context.Customers.Select(x => _mapper.ParseCustomer(x)).ToList().FirstOrDefault(x => x.CustomerPassword == password);
         }
+
+        public List<Location> ViewLoc()
+        {
+            return _context.Locations.Select(x => _mapper.ParseLocation(x)).ToList();
+        }
+
+        public Location ChooseLoc(string location)
+        {
+            return _context.Locations.Select(x => _mapper.ParseLocation(x)).ToList().FirstOrDefault(x => x.LocationName == location);
+
+        }
     }
 }

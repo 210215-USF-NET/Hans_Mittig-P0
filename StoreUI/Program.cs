@@ -16,7 +16,7 @@ namespace StoreUI
 {
     class Program
     {
-        //private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
         {

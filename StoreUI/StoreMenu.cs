@@ -23,7 +23,7 @@ namespace StoreUI
             Console.WriteLine("[2] Place order");
             Console.WriteLine("[3] View order history");
             Console.WriteLine("[4] View location order history (Manager only)");
-            Console.WriteLine("[5] Replenish inventory");
+            Console.WriteLine("[5] Replenish inventory (Manager only)");
             Console.WriteLine("[6] Exit");
 
             // get user input
@@ -102,7 +102,24 @@ namespace StoreUI
             }
         }
 
-        public void ViewLocation(){}
+         public void PickLocation()
+        {
+            Console.WriteLine("Please select a location from the available options: ");
+            foreach (var item in _strBL.ViewLoc())
+            {
+                Console.WriteLine(item.ToString());
+            }
+            Location found = _strBL.ChooseLoc(Console.ReadLine());
+            if(found != null)
+            {
+                Console.WriteLine($"You have selected {found.ToString()} as your location.");
+            }
+            else
+            {
+                Console.WriteLine("Sorry, the specified location does not match our records. Please try again.");
+            }
+
+        } 
 
         public void PlaceOrder()
         {
@@ -110,7 +127,7 @@ namespace StoreUI
         }
 
         public void CustomerLogin()
-        {   
+        {   Console.WriteLine("Welcome to the the Electronics Store login system!");
             if(SearchCustomer()) 
             {
                 Console.WriteLine("Please enter a password for the specified user: ");
@@ -118,10 +135,11 @@ namespace StoreUI
                 if(foundpass != null)
                 {
                     Console.WriteLine("Login successful, please wait a moment...");
+                    PickLocation();
                 }
                 else
                 {
-                    Console.WriteLine("Sorry, the specified name and password combo do not match our records. Please try again.");
+                    Console.WriteLine("Sorry, the specified name and password do not match our records. Please try again.");
                 }
             }
         }

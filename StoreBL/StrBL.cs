@@ -13,6 +13,7 @@ namespace StoreBL
         {
             _repo = repo;
         }
+
         public void AddCustomer(Customer newCustomer)
         {
             _repo.AddCustomer(newCustomer);
@@ -32,5 +33,16 @@ namespace StoreBL
         {
             return _repo.CustomerSignIn(password);
         }
+
+        public List<Location> ViewLoc()
+        {
+            return _repo.ViewLoc();
+        }
+
+        public Location ChooseLoc(string location)
+        {
+            return _repo.ChooseLoc(location);
+        }
+
     }
 }

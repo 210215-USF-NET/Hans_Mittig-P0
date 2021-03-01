@@ -17,6 +17,6 @@ namespace StoreModels
 
         }
     }
-        public override string ToString() => $"{this.LocationName.ToString()} \n";
+        public override string ToString() => $"{this.LocationName.ToString()} ";
     }
 }
