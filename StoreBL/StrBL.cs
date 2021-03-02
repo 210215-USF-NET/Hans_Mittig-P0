@@ -7,13 +7,11 @@ namespace StoreBL
 {
     public class StrBL : IStrBL
     {
-        private ICustomerRepository _repo;
-
-        public StrBL(ICustomerRepository repo)
+        private IStoreRepository _repo;
+        public StrBL(IStoreRepository repo)
         {
             _repo = repo;
         }
-
         public void AddCustomer(Customer newCustomer)
         {
             _repo.AddCustomer(newCustomer);
@@ -42,6 +40,16 @@ namespace StoreBL
         public Location ChooseLoc(string location)
         {
             return _repo.ChooseLoc(location);
+        }
+
+        public Manager ManagerSignInName(string name)
+        {
+            return _repo.ManagerSignInName(name);
+        }
+
+        public Manager ManagerSignInPassword(string password)
+        {
+            return _repo.ManagerSignInPassword(password);
         }
 
     }

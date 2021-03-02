@@ -2,7 +2,7 @@ using StoreModels;
 using System.Collections.Generic;
 namespace StoreDL
 {
-    public interface ICustomerRepository
+    public interface IStoreRepository
     {
          List<Customer> GetCustomers();
 
@@ -14,5 +14,9 @@ namespace StoreDL
          List<Location> ViewLoc();
 
          Location ChooseLoc(string location);
+
+         public Manager ManagerSignInName(string name);
+         public Manager ManagerSignInPassword(string password);
+
     }
 }

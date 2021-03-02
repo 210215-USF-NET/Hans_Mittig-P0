@@ -9,5 +9,8 @@ namespace StoreDL
 
          Model.Location ParseLocation(Entity.Location location);
          Entity.Location ParseLocation(Model.Location location);
+
+         Model.Manager ParseManager(Entity.Manager manager);
+         Entity.Manager ParseManager(Model.Manager manager);
     }
 }

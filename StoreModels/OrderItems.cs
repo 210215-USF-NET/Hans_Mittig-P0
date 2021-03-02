@@ -1,17 +1,13 @@
 using System;
 namespace StoreModels
 {
-    public class Orders
+    public class OrderItems
     {
         public int id;
+        public int orderid;
+        public int quantity;
 
-        public decimal total;
-
-        public DateTime orderdate;
-
-        public int customerid;
-
-        public int locationid;
+        public int productid;
 
         public int Id
         {
@@ -26,56 +22,44 @@ namespace StoreModels
         }
         }
 
-        public decimal Total
+        public int Orderid
         {
-        get{return total;}
-        set 
-        {
-            if(value == null ) 
-            {throw new ArgumentNullException("Error. total cannot be null.");
-            }
-            total = value;
-
-        }
-        }
-
-        public DateTime Orderdate
-        {
-        get{return orderdate;}
+        get{return orderid;}
         set 
         {
             if(value == null ) 
             {throw new ArgumentNullException("Error. ID cannot be null.");
             }
-            orderdate = value;
+            orderid = value;
 
         }
         }
 
-        public int Customerid
+        public int Quantity
         {
-        get{return customerid;}
+        get{return quantity;}
         set 
         {
             if(value == null ) 
             {throw new ArgumentNullException("Error. ID cannot be null.");
             }
-            customerid = value;
+            quantity = value;
 
         }
         }
 
-        public int Locationid
+        public int Productid
         {
-        get{return locationid;}
+        get{return productid;}
         set 
         {
             if(value == null ) 
             {throw new ArgumentNullException("Error. ID cannot be null.");
             }
-            locationid = value;
+            productid = value;
 
         }
         }
+
     }
 }

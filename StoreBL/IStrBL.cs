@@ -16,5 +16,9 @@ namespace StoreBL
 
          Location ChooseLoc(string location);
 
+         Manager ManagerSignInName(string name);
+
+         Manager ManagerSignInPassword(string password);
+
     }
 }

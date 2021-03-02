@@ -1,16 +1,14 @@
 using System;
 namespace StoreModels
 {
-    public class Orders
+    public class Inventory
     {
         public int id;
+        public string inventoryname;
 
-        public decimal total;
+        private string description;
 
-        public DateTime orderdate;
-
-        public int customerid;
-
+        public int productid;
         public int locationid;
 
         public int Id
@@ -26,41 +24,41 @@ namespace StoreModels
         }
         }
 
-        public decimal Total
+        public String InventoryName
         {
-        get{return total;}
+        get{return inventoryname;}
         set 
         {
-            if(value == null ) 
-            {throw new ArgumentNullException("Error. total cannot be null.");
-            }
-            total = value;
+            if(value == null || value.Equals("") ) 
+            {throw new ArgumentNullException("Location should not be null, try again.");
+            } // TODO:
+            inventoryname = value;
 
         }
         }
 
-        public DateTime Orderdate
+        public String Description
         {
-        get{return orderdate;}
+        get{return description;}
+        set 
+        {
+            if(value == null || value.Equals("") ) 
+            {throw new ArgumentNullException("Location should not be null, try again.");
+            } // TODO:
+            description = value;
+
+        }
+        }
+
+        public int Productid
+        {
+        get{return id;}
         set 
         {
             if(value == null ) 
             {throw new ArgumentNullException("Error. ID cannot be null.");
             }
-            orderdate = value;
-
-        }
-        }
-
-        public int Customerid
-        {
-        get{return customerid;}
-        set 
-        {
-            if(value == null ) 
-            {throw new ArgumentNullException("Error. ID cannot be null.");
-            }
-            customerid = value;
+            productid = value;
 
         }
         }
@@ -77,5 +75,6 @@ namespace StoreModels
 
         }
         }
+
     }
 }

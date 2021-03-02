@@ -52,10 +52,10 @@ namespace StoreUI
                     //ViewOrders();
                     break;
                 case "4":
-                    //ViewLocationOrders
+                    ViewLocationOrders();
                     break;
                 case "5":
-                    //ReplenishInventory
+                    ReplenishInventory();
                     break;
                 case "6":
                     stay = false;
@@ -123,25 +123,73 @@ namespace StoreUI
 
         public void PlaceOrder()
         {
-            CustomerLogin();
+            if(CustomerLogin())
+            {PickLocation();}
         }
 
-        public void CustomerLogin()
-        {   Console.WriteLine("Welcome to the the Electronics Store login system!");
-            if(SearchCustomer()) 
+        public Boolean CustomerLogin()
+        {   Console.WriteLine("Welcome to the Elecronics Store login system!");
+            Console.WriteLine("Please enter the full name you registered with: ");
+            Customer found = _strBL.GetCustomerName(Console.ReadLine());
+            if(found != null)
             {
-                Console.WriteLine("Please enter a password for the specified user: ");
+                Console.WriteLine(found.ToString());
+                Console.WriteLine("Please enter the associated password for your account: ");
                 Customer foundpass = _strBL.CustomerSignIn(Console.ReadLine());
                 if(foundpass != null)
                 {
                     Console.WriteLine("Login successful, please wait a moment...");
-                    PickLocation();
+                    return true;
+		    
                 }
                 else
                 {
                     Console.WriteLine("Sorry, the specified name and password do not match our records. Please try again.");
+	            return false;
                 }
             }
+            else
+            {
+                Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
+                return false;
+            }
+        }
+
+        public Boolean ManagerSignIn()
+        {
+            Console.WriteLine("Please enter a manager's full name: ");
+            Manager found = _strBL.ManagerSignInName(Console.ReadLine());
+            if(found != null)
+            {
+                Console.WriteLine(found.ToString());
+                Console.WriteLine("Please enter the manager's password: ");
+                Manager found2 = _strBL.ManagerSignInPassword(Console.ReadLine());
+                if(found2 != null)
+                {
+                    Console.WriteLine("Login successful, please wait a moment...");
+                    return true;
+                }
+                else
+                {
+                Console.WriteLine("Sorry, the specified name and password do not match our records. Please try again.");
+                return false;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
+                return false;
+            }
+        }
+
+        public void ViewLocationOrders()
+        {
+            ManagerSignIn();
+        }
+
+        public void ReplenishInventory()
+        {
+            ManagerSignIn();
         }
     }
 }

@@ -41,5 +41,23 @@ namespace StoreDL
                 Address = location.LocationName
             };
         }
+
+        public Model.Manager ParseManager(Entity.Manager manager)
+        {
+            return new Model.Manager
+            {
+                ManagerName = manager.Name,
+                ManagerPassword = manager.Password
+            };
+        }
+
+        public Entity.Manager ParseManager(Model.Manager manager)
+        {
+            return new Entity.Manager
+            {
+                Name = manager.ManagerName,
+                Password = manager.ManagerPassword
+            };
+        }
     }
 }
