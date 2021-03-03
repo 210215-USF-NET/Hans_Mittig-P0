@@ -6,7 +6,7 @@ namespace StoreModels
         public int id;
         public string inventoryname;
 
-        private string description;
+        private int quantity;
 
         public int productid;
         public int locationid;
@@ -37,15 +37,15 @@ namespace StoreModels
         }
         }
 
-        public String Description
+        public int Quantity
         {
-        get{return description;}
+        get{return quantity;}
         set 
         {
-            if(value == null || value.Equals("") ) 
+            if(value == null ) 
             {throw new ArgumentNullException("Location should not be null, try again.");
             } // TODO:
-            description = value;
+            quantity = value;
 
         }
         }

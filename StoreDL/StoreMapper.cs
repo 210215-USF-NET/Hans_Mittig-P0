@@ -42,6 +42,64 @@ namespace StoreDL
             };
         }
 
+        public Model.Inventory ParseInventory(Entity.Inventory inventory)
+        {
+            return new Model.Inventory
+            {
+                inventoryname = inventory.NameOfInventory
+            };
+        }
+
+        public Entity.Inventory ParseInventory(Model.Inventory inventory)
+        {
+            return new Entity.Inventory
+            {
+                NameOfInventory = inventory.inventoryname
+            };
+        }
+
+        public Model.Product ParseProducts(Entity.Product products)
+        {
+            return new Model.Product
+            {
+                id = products.Id,
+                Name = products.Name,
+                description = products.Description,
+                price = products.Price
+            };
+        }
+
+        public Entity.Product ParseProducts(Model.Product products)
+        {
+            return new Entity.Product
+            {
+                Id = products.id,
+                Name = products.Name,
+                Description = products.Description,
+                Price = products.Price
+            };
+        }
+
+        public Model.Orders ParseOrder(Entity.Order order)
+        {
+            return new Model.Orders{
+                Total = order.Total,
+                Orderdate = order.Orderdate,
+                customerid = (int)order.Customerid,
+                locationid = (int)order.Locationid
+            };
+        }
+
+        public Entity.Order ParseOrder(Model.Orders order)
+        {
+            return new Entity.Order{
+                Total = order.Total,
+                Orderdate = order.Orderdate,
+                Customerid = order.customerid,
+                Locationid = order.locationid
+            };
+        }
+
         public Model.Manager ParseManager(Entity.Manager manager)
         {
             return new Model.Manager

@@ -20,5 +20,15 @@ namespace StoreBL
 
          Manager ManagerSignInPassword(string password);
 
+         void ViewInventory(string locvalue);
+
+         Inventory InventorySelect(string inventory);
+
+         void ViewProducts(string invvalue, string locvalue);
+
+         Product SelectProduct(string product);
+
+         void AddOrder(Orders order);
+
     }
 }

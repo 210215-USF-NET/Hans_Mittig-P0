@@ -17,6 +17,7 @@ namespace StoreDL.Entities
         {
         }
 
+        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
@@ -25,10 +26,38 @@ namespace StoreDL.Entities
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Product> Products { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.ToTable("Cart");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Locationid).HasColumnName("locationid");
+
+                entity.Property(e => e.Productid).HasColumnName("productid");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.Property(e => e.Total)
+                    .HasColumnType("decimal(9, 2)")
+                    .HasColumnName("total");
+
+                entity.HasOne(d => d.Location)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.Locationid)
+                    .HasConstraintName("FK__Cart__locationid__38B96646");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.Productid)
+                    .HasConstraintName("FK__Cart__productid__37C5420D");
+            });
 
             modelBuilder.Entity<Customer>(entity =>
             {
@@ -68,12 +97,12 @@ namespace StoreDL.Entities
                 entity.HasOne(d => d.Location)
                     .WithMany(p => p.Inventories)
                     .HasForeignKey(d => d.Locationid)
-                    .HasConstraintName("FK__Inventory__locat__77DFC722");
+                    .HasConstraintName("FK__Inventory__locat__34E8D562");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Inventories)
                     .HasForeignKey(d => d.Productid)
-                    .HasConstraintName("FK__Inventory__produ__76EBA2E9");
+                    .HasConstraintName("FK__Inventory__produ__33F4B129");
             });
 
             modelBuilder.Entity<Location>(entity =>
@@ -125,12 +154,12 @@ namespace StoreDL.Entities
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.Customerid)
-                    .HasConstraintName("FK__Orders__customer__7ABC33CD");
+                    .HasConstraintName("FK__Orders__customer__3B95D2F1");
 
                 entity.HasOne(d => d.Location)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.Locationid)
-                    .HasConstraintName("FK__Orders__location__7BB05806");
+                    .HasConstraintName("FK__Orders__location__3C89F72A");
             });
 
             modelBuilder.Entity<OrderItem>(entity =>
@@ -146,12 +175,12 @@ namespace StoreDL.Entities
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderItems)
                     .HasForeignKey(d => d.Orderid)
-                    .HasConstraintName("FK__OrderItem__order__7E8CC4B1");
+                    .HasConstraintName("FK__OrderItem__order__3F6663D5");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderItems)
                     .HasForeignKey(d => d.Productid)
-                    .HasConstraintName("FK__OrderItem__produ__7F80E8EA");
+                    .HasConstraintName("FK__OrderItem__produ__405A880E");
             });
 
             modelBuilder.Entity<Product>(entity =>

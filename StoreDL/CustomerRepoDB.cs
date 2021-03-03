@@ -4,6 +4,7 @@ using Entity = StoreDL.Entities;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using StoreModels;
+using System;
 namespace StoreDL
 {
     public class CustomerRepoDB : IStoreRepository
@@ -22,6 +23,12 @@ namespace StoreDL
             _context.SaveChanges();
             return newCustomer;
         }
+
+        public Model.Orders AddOrder(Model.Orders order)
+        {     _context.Orders.Add(_mapper.ParseOrder(order));
+              _context.SaveChanges();
+              return order;
+        }     
 
         public List<Model.Customer> GetCustomers()
         {
@@ -46,6 +53,45 @@ namespace StoreDL
         public Location ChooseLoc(string location)
         {
             return _context.Locations.Select(x => _mapper.ParseLocation(x)).ToList().FirstOrDefault(x => x.LocationName == location);
+        }
+
+        public void ViewInventory(string locvalue)
+        {   
+            var queryInventory = (
+            from inventory in _context.Inventories join loc in _context.Locations
+            on inventory.Locationid equals loc.Id
+            where loc.Address == locvalue
+            select inventory
+            );
+        foreach (var item in queryInventory)
+            {
+                Console.WriteLine(String.Format(item.NameOfInventory));
+            }
+        }
+
+        public Inventory SelectInventory(string inventory)
+        {
+            return _context.Inventories.Select(x => _mapper.ParseInventory(x)).ToList().FirstOrDefault(x => x.InventoryName == inventory);
+        }
+
+        public void ViewProducts(string invvalue, string locvalue)
+        {   
+            var queryProducts = (
+            from inv in _context.Inventories join loc in _context.Locations
+            on inv.Locationid equals loc.Id
+            join prod in _context.Products
+            on inv.Productid equals prod.Id
+            where inv.NameOfInventory == invvalue
+            select prod
+            ).Distinct();
+        foreach (var item in queryProducts)
+            {
+                Console.WriteLine($"Product: {item.Name} \tDecription: {item.Description} \tPrice: ${item.Price}");
+            }
+        }
+        
+        public Product SelectProduct(string product)
+        {   return _context.Products.Select(x =>_mapper.ParseProducts(x)).ToList().Last(x => x.Name == product);
         }
 
         public Manager ManagerSignInName(string name)

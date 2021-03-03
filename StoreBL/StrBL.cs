@@ -42,6 +42,31 @@ namespace StoreBL
             return _repo.ChooseLoc(location);
         }
 
+
+        public void ViewInventory(string locvalue)
+        {
+            _repo.ViewInventory(locvalue);
+        }
+
+        public Inventory InventorySelect(string inventory)
+        {
+            return _repo.SelectInventory(inventory);
+        }
+
+        public void ViewProducts(string invvalue, string locvalue)
+        {
+            _repo.ViewProducts(invvalue, locvalue);
+        }
+
+        public Product SelectProduct(string product)
+        {
+            return _repo.SelectProduct(product);
+        }
+
+        public void AddOrder(Orders order)
+        {
+            _repo.AddOrder(order);
+        }
         public Manager ManagerSignInName(string name)
         {
             return _repo.ManagerSignInName(name);

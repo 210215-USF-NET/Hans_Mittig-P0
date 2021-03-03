@@ -15,6 +15,16 @@ namespace StoreDL
 
          Location ChooseLoc(string location);
 
+         void ViewInventory(string locvalue);
+
+         Inventory SelectInventory(string inventory);
+
+         void ViewProducts(string invvalue, string locvalue);
+
+         Product SelectProduct(string product);
+
+         Orders AddOrder(Orders order);
+
          public Manager ManagerSignInName(string name);
          public Manager ManagerSignInPassword(string password);
 

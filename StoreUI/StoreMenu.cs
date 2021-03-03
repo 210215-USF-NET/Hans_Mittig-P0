@@ -7,7 +7,7 @@ namespace StoreUI
     public class StoreMenu : IMenu
     {
         private IStrBL _strBL;
-
+        
         public StoreMenu(IStrBL strBL)
         {
             _strBL = strBL;
@@ -102,35 +102,46 @@ namespace StoreUI
             }
         }
 
-         public void PickLocation()
+         public string PickLocation()
         {
             Console.WriteLine("Please select a location from the available options: ");
             foreach (var item in _strBL.ViewLoc())
             {
                 Console.WriteLine(item.ToString());
             }
-            Location found = _strBL.ChooseLoc(Console.ReadLine());
+            string location = Console.ReadLine();
+            Location found = _strBL.ChooseLoc(location);
             if(found != null)
             {
                 Console.WriteLine($"You have selected {found.ToString()} as your location.");
+                return location;
             }
             else
             {
                 Console.WriteLine("Sorry, the specified location does not match our records. Please try again.");
+                return null;
             }
 
         } 
 
         public void PlaceOrder()
-        {
-            if(CustomerLogin())
-            {PickLocation();}
-        }
-
-        public Boolean CustomerLogin()
-        {   Console.WriteLine("Welcome to the Elecronics Store login system!");
+        {   /* String name = CustomerLogin();
+            if(CustomerLogin() != null)
+            {String location = PickLocation();
+              if(PickLocation() != null)
+              {
+                  //PickInventory();
+              }
+            } */
+            string name = "";
+            string location = "";
+            string inventoryname = "";
+            string productname ="";
+            int quantity = 0;
+            Console.WriteLine("Welcome to the Elecronics Store login system!");
             Console.WriteLine("Please enter the full name you registered with: ");
-            Customer found = _strBL.GetCustomerName(Console.ReadLine());
+            name = Console.ReadLine();
+            Customer found = _strBL.GetCustomerName(name);
             if(found != null)
             {
                 Console.WriteLine(found.ToString());
@@ -139,19 +150,96 @@ namespace StoreUI
                 if(foundpass != null)
                 {
                     Console.WriteLine("Login successful, please wait a moment...");
-                    return true;
-		    
+                    Console.WriteLine("Please select a location from the available options: ");
+            foreach (var item in _strBL.ViewLoc())
+            {
+                Console.WriteLine(item.ToString());
+            }
+            location = Console.ReadLine();
+            Location foundloc = _strBL.ChooseLoc(location);
+            if(found != null)
+            {
+                Console.WriteLine($"You have selected {foundloc.ToString()} as your location.");
+                Console.WriteLine("Please choose from the available types of products: ");
+                _strBL.ViewInventory(location);
+                inventoryname = Console.ReadLine();
+                Inventory foundinv = _strBL.InventorySelect(inventoryname);
+                if(foundinv !=null)
+                    {
+                        Console.WriteLine($"You have selected {inventoryname}.");
+                        Console.WriteLine("Please choose from the products available");
+                        _strBL.ViewProducts(inventoryname, location);
+                        productname = Console.ReadLine();
+                        Product foundprod = _strBL.SelectProduct(productname);
+                        if(foundprod != null)
+                        {
+                            Console.WriteLine($"{productname} selected. How many would you like to buy?");
+                            quantity = Convert.ToInt32(Console.ReadLine());
+                            if(quantity > 0)
+                            {
+                                Console.WriteLine($"Checkout for {name}");
+                                
+                            }
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid product entered. Please input a valid product from the list.");
+                            quantity = 0;
+        
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, the specified product does not exist.");
+                        inventoryname = null;
+                    }
+            }
+            else
+            {
+                Console.WriteLine("Sorry, the specified location does not match our records. Please try again.");
+                location = null;
+            }
                 }
                 else
                 {
                     Console.WriteLine("Sorry, the specified name and password do not match our records. Please try again.");
-	            return false;
+	            name = null;
                 }
             }
             else
             {
                 Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
-                return false;
+                name = null;
+            }
+        }
+
+        public string CustomerLogin()
+        {   Console.WriteLine("Welcome to the Elecronics Store login system!");
+            Console.WriteLine("Please enter the full name you registered with: ");
+            string name = Console.ReadLine();
+            Customer found = _strBL.GetCustomerName(name);
+            if(found != null)
+            {
+                Console.WriteLine(found.ToString());
+                Console.WriteLine("Please enter the associated password for your account: ");
+                Customer foundpass = _strBL.CustomerSignIn(Console.ReadLine());
+                if(foundpass != null)
+                {
+                    Console.WriteLine("Login successful, please wait a moment...");
+                    return name;
+		    
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, the specified name and password do not match our records. Please try again.");
+	            return null;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
+                return null;
             }
         }
 
