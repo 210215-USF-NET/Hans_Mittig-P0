@@ -16,11 +16,14 @@ namespace StoreUI
         private Customer _customer;
         public List<Orders> customerOrders;
 
+        public Cart findcart;
+
         public CustomerMenu(IStrBL _strBL, Customer customer)
         {
             _strbl = _strBL;
             _customer = customer;
             customerOrders = GetOrders(_strBL.AllOrders());
+
         }
          public void Start()
         {    Boolean stay = true;
@@ -90,22 +93,14 @@ namespace StoreUI
                                 Boolean select = true;
                                 do{
                                     string userInput = Console.ReadLine();
-                                    switch(userInput)
+                                    switch(userInput.ToUpper())
                                     {
-                                    case "yes":
                                     case "YES":
-                                    case "Yes":
-                                    case "YeS":
-                                    case "YEs":
-                                    case "yEs":
-                                    case "yES":
-                                    case "yeS":
                                     _strbl.AddToCart(_customer, foundloc, foundprod, quantity);
+                                    Cart newcart =GetCart(_customer.CustomerID);
+                                    CartItems cartItems = _strbl.AddToCartItems(newcart, foundprod, quantity);
                                     select = false;
                                     break;
-                                    case "no":
-                                    case "No":
-                                    case "nO":
                                     case "NO":
                                     select = false;
                                     break;
@@ -143,6 +138,11 @@ namespace StoreUI
                 {
                     Console.WriteLine(order.ToString());
                  }
+        }
+
+        public Cart GetCart(int x)
+        {
+            return _strbl.GetCart(x);
         }
 
         public List<Orders> GetOrders(List<Orders> orders)

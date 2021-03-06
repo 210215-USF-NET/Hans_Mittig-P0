@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using StoreDL;
+using Entity = StoreDL.Entities;
 using StoreModels;
 
 namespace StoreBL
@@ -65,11 +66,22 @@ namespace StoreBL
 
         public void AddToCart(Customer c, Location l, Product p, int q)
         {
+            //return 
             _repo.AddToCart(c,l, p, q);
         }
 
         public void AddCart(Cart c)
         { _repo.AddCart(c);}
+
+        public CartItems AddToCartItems(Cart c, Product p, int q)
+        {
+            return _repo.AddToCartItems(c, p, q);
+        }
+
+        public void AddCartItems(CartItems c)
+        {
+            _repo.AddCartItems(c);
+        }
         public void AddOrder(Orders order)
         {
             _repo.AddOrder(order);
@@ -87,6 +99,11 @@ namespace StoreBL
         public List<Orders> AllOrders()
         {
             return _repo.AllOrders();
+        }
+
+        public Cart GetCart(int x)
+        {
+            return _repo.GetCart(x);
         }
     }
 }

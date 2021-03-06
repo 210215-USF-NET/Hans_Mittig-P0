@@ -6,6 +6,7 @@ namespace StoreBL
     {
          List<Customer> GetCustomers();
 
+
          void AddCustomer(Customer newCustomer);
 
          Customer GetCustomerName(string name);
@@ -30,11 +31,17 @@ namespace StoreBL
 
          void AddToCart(Customer customer, Location l, Product product, int q);
 
+         CartItems AddToCartItems(Cart c, Product p, int q);
+
+         void AddCartItems(CartItems c);
+
          void AddCart(Cart c);
 
          void AddOrder(Orders order);
 
          List<Orders> AllOrders();
+
+         public Cart GetCart(int x);
 
     }
 }

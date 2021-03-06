@@ -31,9 +31,14 @@ namespace StoreDL
 
          public void AddToCart(Customer c, Location l, Product p, int q);
 
-        public Model.Cart AddCart(Model.Cart c);
+        public void AddCart(Model.Cart c);
+
+        public CartItems AddToCartItems(Cart c, Product p, int q);
+
+        public void AddCartItems(CartItems c);
          public Manager ManagerSignInName(string name);
          public Manager ManagerSignInPassword(string password);
+         public Cart GetCart(int x);
 
     }
 }

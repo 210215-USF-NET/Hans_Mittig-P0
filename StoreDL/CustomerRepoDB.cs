@@ -101,13 +101,30 @@ namespace StoreDL
             newcart.LocationID = l.Locationid;
             newcart.Total +=  p.price * q;
             AddCart(newcart);
+            //return newcart;
         }
 
-        public Model.Cart AddCart(Model.Cart c)
+        public void AddCart(Model.Cart c)
         {
             _context.Carts.Add(_mapper.ParseCart(c));
             _context.SaveChanges();
-            return c;
+            
+        }
+
+        public CartItems AddToCartItems(Cart c, Product p, int q)
+        {
+            CartItems citems = new CartItems();
+            citems.cartid = c.id;
+            citems.productid = p.id;
+            citems.quantity = q;
+            AddCartItems(citems);
+            return citems;
+        }
+
+        public void AddCartItems(CartItems c)
+        {
+             _context.CartItems.Add(_mapper.ParseCartItems(c));
+            _context.SaveChanges();
         }
         public List<Orders> AllOrders()
         {
@@ -122,6 +139,11 @@ namespace StoreDL
         public Manager ManagerSignInPassword(string password)
         {
             return _context.Managers.Select(x => _mapper.ParseManager(x)).ToList().FirstOrDefault(x => x.ManagerPassword == password);
+        }
+
+        public Cart GetCart(int x)
+        {
+            return _mapper.ParseCart(_context.Carts.Where(y => y.Id == x).FirstOrDefault());
         }
     }
 }

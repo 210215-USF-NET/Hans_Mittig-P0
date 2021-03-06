@@ -124,7 +124,7 @@ namespace StoreDL
         public Entity.Cart ParseCart(Model.Cart cart)
         {
             return new Entity.Cart{
-                Id = cart.id,
+                //Id = cart.id,
                 Total = cart.total,
                 Locationid = cart.locationid,
                 Customterid = cart.customerid
@@ -144,7 +144,7 @@ namespace StoreDL
         public Entity.CartItem ParseCartItems(Model.CartItems cartitems)
         {
             return new Entity.CartItem{
-                Id = cartitems.id,
+                //Id = cartitems.id,
                 Cartid = cartitems.cartid,
                 Productid = cartitems.productid,
                 Quantity = cartitems.quantity

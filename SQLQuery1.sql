@@ -118,6 +118,8 @@ SELECT * FROM orders join customers on orders.customerid = customers.id;
 
 SELECT * FROM cart;
 
+SELECT * FROM cartitems;
+
 SELECT * FROM inventory;
 
 SELECT * FROM orderitems;
