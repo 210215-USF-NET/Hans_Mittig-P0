@@ -98,7 +98,9 @@ namespace StoreUI
                                     case "YES":
                                     _strbl.AddToCart(_customer, foundloc, foundprod, quantity);
                                     Cart newcart =GetCart(_customer.CustomerID);
-                                    CartItems cartItems = _strbl.AddToCartItems(newcart, foundprod, quantity);
+                                    _strbl.AddToCartItems(newcart, foundprod, quantity);
+                                    CartItems newcartitems = GetCartItems(newcart.id);
+                                    purchase(_customer, newcart, newcartitems);
                                     select = false;
                                     break;
                                     case "NO":
@@ -109,9 +111,7 @@ namespace StoreUI
                                     break;
                                     }
                                 }while(select);
-
-                                Console.WriteLine($"Checkout for {_customer.CustomerName}");
-                                
+                                Console.WriteLine("Thank you for your purchase!");
                             }
                             
                         }
@@ -145,20 +145,33 @@ namespace StoreUI
             return _strbl.GetCart(x);
         }
 
+        public CartItems GetCartItems(int x)
+        {
+            return _strbl.GetCartItems(x);
+        }
+
+        public void purchase(Customer w, Cart x, CartItems y)
+        {   Product p = GetProduct(w.customerid);
+            Console.WriteLine($"Checkout for {w.CustomerName}");
+            Console.WriteLine($"{y.quantity} {p.Name}(s)\t${x.total}");
+            decimal ttl = x.total;
+            DateTime now = DateTime.Now;
+            Console.WriteLine($"Purchase made on {now}.");
+            _strbl.AddOrder(ttl, now, w, x);
+            //OrderItems neworderitems = _strbl.AddOrderItems(neworder, y, p);
+        }
+
         public List<Orders> GetOrders(List<Orders> orders)
         {
             List<Orders> customerorderlist = new List<Orders>();
             customerorderlist = orders.Select(O => O).Where(O => O.customerid == _customer.customerid).ToList();
             return customerorderlist;
-            /*foreach(Orders x in orders)
-            {
-                if (x.customerid == _customer.customerid)
-                {
-                    customerorderlist.Add(x);
-                }
-            } return customerorderlist; */
         }
 
+        public Product GetProduct(int x)
+        {
+            return _strbl.GetProduct(x);
+        }
         /* public void AddCart(Customer x, Location y, Product product, int q)
         {
             Cart newcart = _strbl.AddToCart(x, y,  product, q);

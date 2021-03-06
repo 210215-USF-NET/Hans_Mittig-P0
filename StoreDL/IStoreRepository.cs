@@ -1,6 +1,7 @@
 using StoreModels;
 using Model = StoreModels;
 using System.Collections.Generic;
+using System;
 namespace StoreDL
 {
     public interface IStoreRepository
@@ -25,7 +26,9 @@ namespace StoreDL
 
          Product SelectProduct(string product);
 
-         Orders AddOrder(Orders order);
+         void AddOrder(decimal x, DateTime y, Customer c, Cart z);
+
+         public void AddOrderToDatabase(Orders order);
 
          List<Orders> AllOrders();
 
@@ -33,12 +36,14 @@ namespace StoreDL
 
         public void AddCart(Model.Cart c);
 
-        public CartItems AddToCartItems(Cart c, Product p, int q);
+        public void AddToCartItems(Cart c, Product p, int q);
 
         public void AddCartItems(CartItems c);
          public Manager ManagerSignInName(string name);
          public Manager ManagerSignInPassword(string password);
          public Cart GetCart(int x);
+         public CartItems GetCartItems(int x);
+         public Product GetProduct(int x);
 
     }
 }

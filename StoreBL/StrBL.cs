@@ -73,18 +73,23 @@ namespace StoreBL
         public void AddCart(Cart c)
         { _repo.AddCart(c);}
 
-        public CartItems AddToCartItems(Cart c, Product p, int q)
+        public void AddToCartItems(Cart c, Product p, int q)
         {
-            return _repo.AddToCartItems(c, p, q);
+            _repo.AddToCartItems(c, p, q);
         }
 
         public void AddCartItems(CartItems c)
         {
             _repo.AddCartItems(c);
         }
-        public void AddOrder(Orders order)
+        public void AddOrder(decimal x, DateTime y, Customer c, Cart z)
         {
-            _repo.AddOrder(order);
+            _repo.AddOrder(x, y, c, z);
+        }
+
+        public void AddOrderToDatabase(Orders order)
+        {
+            _repo.AddOrderToDatabase(order);
         }
         public Manager ManagerSignInName(string name)
         {
@@ -104,6 +109,16 @@ namespace StoreBL
         public Cart GetCart(int x)
         {
             return _repo.GetCart(x);
+        }
+
+        public CartItems GetCartItems(int x)
+        {
+            return _repo.GetCartItems(x);
+        }
+
+        public Product GetProduct(int x)
+        {
+            return _repo.GetProduct(x);
         }
     }
 }

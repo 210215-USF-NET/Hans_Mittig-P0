@@ -111,14 +111,17 @@ namespace StoreDL
             
         }
 
-        public CartItems AddToCartItems(Cart c, Product p, int q)
+        public Product GetProduct(int x)
+        { return _mapper.ParseProducts(_context.Products.Where(y => y.Id == x).FirstOrDefault());}
+
+        public void AddToCartItems(Cart c, Product p, int q)
         {
             CartItems citems = new CartItems();
             citems.cartid = c.id;
             citems.productid = p.id;
             citems.quantity = q;
             AddCartItems(citems);
-            return citems;
+            //return citems;
         }
 
         public void AddCartItems(CartItems c)
@@ -129,6 +132,21 @@ namespace StoreDL
         public List<Orders> AllOrders()
         {
             return _context.Orders.AsNoTracking().Select(x => _mapper.ParseOrder(x)).ToList();
+        }
+
+        public void AddOrder(decimal x, DateTime y, Customer c, Cart z)
+        {
+            Orders order = new Orders();
+            order.total = x;
+            order.orderdate = y;
+            order.customerid = c.customerid;
+            order.locationid = z.locationid;
+            AddOrderToDatabase(order);
+        }
+        public void AddOrderToDatabase(Orders order)
+        {
+            _context.Orders.Add(_mapper.ParseOrder(order));
+            _context.SaveChanges();
         }
 
         public Manager ManagerSignInName(string name)
@@ -144,6 +162,11 @@ namespace StoreDL
         public Cart GetCart(int x)
         {
             return _mapper.ParseCart(_context.Carts.Where(y => y.Id == x).FirstOrDefault());
+        }
+
+        public CartItems GetCartItems(int x)
+        {
+            return _mapper.ParseCartItems(_context.CartItems.Where(y => y.Id == x).FirstOrDefault());
         }
     }
 }

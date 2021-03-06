@@ -9,9 +9,9 @@ namespace StoreModels
 
         public DateTime orderdate;
 
-        public int customerid;
+        public int? customerid;
 
-        public int locationid;
+        public int? locationid;
 
         public int Id
         {
@@ -52,7 +52,7 @@ namespace StoreModels
         }
         }
 
-        public int Customerid
+        public int? Customerid
         {
         get{return customerid;}
         set 
@@ -65,7 +65,7 @@ namespace StoreModels
         }
         }
 
-        public int Locationid
+        public int? Locationid
         {
         get{return locationid;}
         set 
