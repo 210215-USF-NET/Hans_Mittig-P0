@@ -30,5 +30,7 @@ namespace StoreBL
 
          void AddOrder(Orders order);
 
+         List<Orders> AllOrders();
+
     }
 }

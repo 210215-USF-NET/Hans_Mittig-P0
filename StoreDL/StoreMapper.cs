@@ -12,6 +12,7 @@ namespace StoreDL
         {
             return new Model.Customer
             {
+                customerid = customer.Id,
                 CustomerName = customer.Name,
                 CustomerPassword = customer.Password
             };
@@ -20,7 +21,8 @@ namespace StoreDL
         public Entity.Customer ParseCustomer(Model.Customer customer)
         {
             return new Entity.Customer
-            {
+            {   
+                //Id = customer.customerid,
                 Name = customer.CustomerName,
                 Password = customer.CustomerPassword
             };
@@ -46,7 +48,10 @@ namespace StoreDL
         {
             return new Model.Inventory
             {
-                inventoryname = inventory.NameOfInventory
+                inventoryname = inventory.NameOfInventory,
+                quantity = inventory.Quantity,
+                productid = inventory.Productid,
+                locationid = inventory.Locationid
             };
         }
 
@@ -54,7 +59,12 @@ namespace StoreDL
         {
             return new Entity.Inventory
             {
-                NameOfInventory = inventory.inventoryname
+                NameOfInventory = inventory.inventoryname,
+                Quantity = inventory.quantity,
+                Productid = inventory.productid,
+                Locationid = inventory.locationid
+
+
             };
         }
 
@@ -85,8 +95,8 @@ namespace StoreDL
             return new Model.Orders{
                 Total = order.Total,
                 Orderdate = order.Orderdate,
-                customerid = (int)order.Customerid,
-                locationid = (int)order.Locationid
+                customerid = order.Customerid.Value,
+                locationid = order.Locationid.Value
             };
         }
 
@@ -97,6 +107,66 @@ namespace StoreDL
                 Orderdate = order.Orderdate,
                 Customerid = order.customerid,
                 Locationid = order.locationid
+            };
+        }
+
+        public Model.Cart ParseCart(Entity.Cart cart)
+        {
+            return new Model.Cart{
+                id = cart.Id,
+                total = cart.Total,
+                locationid = cart.Locationid,
+                customerid = cart.Customterid
+            };
+        }
+
+        public Entity.Cart ParseCart(Model.Cart cart)
+        {
+            return new Entity.Cart{
+                Id = cart.id,
+                Total = cart.total,
+                Locationid = cart.locationid,
+                Customterid = cart.customerid
+            };
+        }
+
+        public Model.CartItems ParseCartItems(Entity.CartItem cartitems)
+        {
+            return new Model.CartItems{
+                id = cartitems.Id,
+                cartid = cartitems.Cartid,
+                productid = cartitems.Productid,
+                quantity = cartitems.Quantity
+            };
+        }
+
+        public Entity.CartItem ParseCartItems(Model.CartItems cartitems)
+        {
+            return new Entity.CartItem{
+                Id = cartitems.id,
+                Cartid = cartitems.cartid,
+                Productid = cartitems.productid,
+                Quantity = cartitems.quantity
+            };
+        }
+
+        public Model.OrderItems ParseOrderItems(Entity.OrderItem orderitems)
+        {
+            return new Model.OrderItems{
+                id = orderitems.Id,
+                orderid = orderitems.Orderid,
+                quantity = orderitems.Quantity,
+                productid = orderitems.Productid
+            };
+        }
+
+        public Entity.OrderItem ParseOrderItems(Model.OrderItems orderitems)
+        {
+            return new Entity.OrderItem{
+                Id = orderitems.id,
+                Orderid = orderitems.orderid,
+                Quantity = orderitems.quantity,
+                Productid = orderitems.productid
             };
         }
 

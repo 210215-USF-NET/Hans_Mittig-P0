@@ -77,5 +77,9 @@ namespace StoreBL
             return _repo.ManagerSignInPassword(password);
         }
 
+        public List<Orders> AllOrders()
+        {
+            return _repo.AllOrders();
+        }
     }
 }

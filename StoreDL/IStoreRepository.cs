@@ -7,6 +7,7 @@ namespace StoreDL
          List<Customer> GetCustomers();
 
          Customer AddCustomer(Customer newCustomer);
+
          Customer GetCustomerName(string name);
 
          Customer CustomerSignIn(string password);
@@ -24,6 +25,8 @@ namespace StoreDL
          Product SelectProduct(string product);
 
          Orders AddOrder(Orders order);
+
+         List<Orders> AllOrders();
 
          public Manager ManagerSignInName(string name);
          public Manager ManagerSignInPassword(string password);

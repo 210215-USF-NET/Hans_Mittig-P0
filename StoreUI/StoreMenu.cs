@@ -1,5 +1,6 @@
 using StoreBL;
 using StoreModels;
+using System.Collections.Generic;
 using System;
 
 namespace StoreUI
@@ -20,10 +21,10 @@ namespace StoreUI
             Console.WriteLine("Welcome to my electronics store. What would you like to do?");
             Console.WriteLine("[0] Add customer");
             Console.WriteLine("[1] Search for Customer");
-            Console.WriteLine("[2] Place order");
-            Console.WriteLine("[3] View order history");
-            Console.WriteLine("[4] View location order history (Manager only)");
-            Console.WriteLine("[5] Replenish inventory (Manager only)");
+            Console.WriteLine("[2] Customer Login");
+            //Console.WriteLine("[3] View order history");
+            Console.WriteLine("[4] Manager Login");
+            //Console.WriteLine("[5] Replenish inventory (Manager only)");
             Console.WriteLine("[6] Exit");
 
             // get user input
@@ -46,10 +47,10 @@ namespace StoreUI
                     SearchCustomer();
                     break;
                 case "2":
-                    PlaceOrder();
+                    CustomerLogin();
                     break;
                 case "3":
-                    //ViewOrders();
+                    ViewOrders();
                     break;
                 case "4":
                     ViewLocationOrders();
@@ -124,15 +125,13 @@ namespace StoreUI
 
         } 
 
-        public void PlaceOrder()
-        {   /* String name = CustomerLogin();
-            if(CustomerLogin() != null)
-            {String location = PickLocation();
-              if(PickLocation() != null)
-              {
-                  //PickInventory();
-              }
-            } */
+        public void ViewOrders()
+        {
+            Console.WriteLine("Sorry, this feature is not fully implemented yet!");
+        }
+
+        /*public void PlaceOrder()
+        {  
             string name = "";
             string location = "";
             string inventoryname = "";
@@ -212,34 +211,35 @@ namespace StoreUI
                 Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
                 name = null;
             }
-        }
+        }*/
 
-        public string CustomerLogin()
+        public void CustomerLogin()
         {   Console.WriteLine("Welcome to the Elecronics Store login system!");
             Console.WriteLine("Please enter the full name you registered with: ");
             string name = Console.ReadLine();
             Customer found = _strBL.GetCustomerName(name);
-            if(found != null)
+            if(found == null)
             {
-                Console.WriteLine(found.ToString());
-                Console.WriteLine("Please enter the associated password for your account: ");
-                Customer foundpass = _strBL.CustomerSignIn(Console.ReadLine());
-                if(foundpass != null)
-                {
-                    Console.WriteLine("Login successful, please wait a moment...");
-                    return name;
-		    
-                }
-                else
-                {
-                    Console.WriteLine("Sorry, the specified name and password do not match our records. Please try again.");
-	            return null;
-                }
+                Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
+                //return null;
             }
             else
             {
-                Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
-                return null;
+                Console.WriteLine(found.ToString());
+                Console.WriteLine("Please enter the associated password for your account: ");
+                String password = Console.ReadLine();
+                Customer foundpass = _strBL.CustomerSignIn(password);
+                if(foundpass == null)
+                {
+                    Console.WriteLine("Sorry, the specified password does not match with this account.");
+                    //return null;
+                }
+                else
+                {
+                    Console.WriteLine("Logging you in, please wait...");
+                    CustomerMenu cmenu = new CustomerMenu(_strBL, found);
+                    cmenu.Start();
+                }
             }
         }
 
@@ -273,11 +273,13 @@ namespace StoreUI
         public void ViewLocationOrders()
         {
             ManagerSignIn();
+            Console.WriteLine("Sorry, this feature is not fully implemented yet!");
         }
 
         public void ReplenishInventory()
         {
             ManagerSignIn();
+            Console.WriteLine("Sorry, this feature is not fully implemented yet!");
         }
     }
 }

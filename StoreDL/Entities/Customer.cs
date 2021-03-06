@@ -9,6 +9,7 @@ namespace StoreDL.Entities
     {
         public Customer()
         {
+            Carts = new HashSet<Cart>();
             Orders = new HashSet<Order>();
         }
 
@@ -16,6 +17,7 @@ namespace StoreDL.Entities
         public string Name { get; set; }
         public string Password { get; set; }
 
+        public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

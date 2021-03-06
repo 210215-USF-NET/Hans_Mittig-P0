@@ -3,8 +3,20 @@ namespace StoreModels
 {
     public class Location
     {
-        public int id;
+        private int locationID;
         private string locationName;
+
+        public int Locationid
+        {
+            get{return locationID;}
+            set{
+                if(value == null)
+                {
+                    throw new ArgumentNullException("Location cannot be null.");
+                }
+                locationID = value;
+            }
+        }
 
         public String LocationName
         {
@@ -19,18 +31,6 @@ namespace StoreModels
         }
         }
 
-        public int ID {
-            get{
-                return id;
-            } 
-            set {
-                if(value.Equals(null))
-                {
-                    throw new ArgumentNullException("Error retrieving location id.");
-                }
-                id = value;
-            }
-        }
         public override string ToString() => $"{this.LocationName.ToString()}";
     }
 }

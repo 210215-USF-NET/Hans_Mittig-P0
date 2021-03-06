@@ -2,6 +2,7 @@
 DROP TABLE orderitems;
 DROP TABLE orders;
 DROP TABLE inventory;
+DROP TABLE CartItems;
 DROP TABLE Cart;
 DROP TABLE location;
 DROP TABLE customers;
@@ -49,11 +50,18 @@ CREATE TABLE Inventory
 
 CREATE TABLE Cart
 (
-	id INT PRIMARY KEY,
+	id INT IDENTITY PRIMARY KEY,
 	total DECIMAL(9,2) not null,
-	quantity INT not null,
+	locationid INT REFERENCES Location(id),
+	customterid INT REFERENCES Customers(id)
+);
+
+CREATE TABLE CartItems
+( 
+	id INT IDENTITY PRIMARY KEY,
+	cartid INT references Cart(id),
 	productid INT REFERENCES Product(id),
-	locationid INT REFERENCES Location(id)
+	quantity INT not null
 );
 
 CREATE TABLE Orders

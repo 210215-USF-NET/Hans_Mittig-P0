@@ -94,6 +94,11 @@ namespace StoreDL
         {   return _context.Products.Select(x =>_mapper.ParseProducts(x)).ToList().Last(x => x.Name == product);
         }
 
+        public List<Orders> AllOrders()
+        {
+            return _context.Orders.AsNoTracking().Select(x => _mapper.ParseOrder(x)).ToList();
+        }
+
         public Manager ManagerSignInName(string name)
         {
             return _context.Managers.Select(x => _mapper.ParseManager(x)).ToList().FirstOrDefault(x => x.ManagerName == name);

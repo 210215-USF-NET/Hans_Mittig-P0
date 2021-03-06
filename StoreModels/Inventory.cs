@@ -6,10 +6,10 @@ namespace StoreModels
         public int id;
         public string inventoryname;
 
-        private int quantity;
+        public int quantity;
 
-        public int productid;
-        public int locationid;
+        public int? productid;
+        public int? locationid;
 
         public int Id
         {
@@ -63,7 +63,7 @@ namespace StoreModels
         }
         }
 
-        public int Locationid
+        public int? Locationid
         {
         get{return locationid;}
         set 

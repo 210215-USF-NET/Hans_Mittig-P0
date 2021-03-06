@@ -4,10 +4,10 @@ namespace StoreModels
     public class OrderItems
     {
         public int id;
-        public int orderid;
+        public int? orderid;
         public int quantity;
 
-        public int productid;
+        public int? productid;
 
         public int Id
         {
@@ -22,7 +22,7 @@ namespace StoreModels
         }
         }
 
-        public int Orderid
+        public int? Orderid
         {
         get{return orderid;}
         set 
@@ -48,7 +48,7 @@ namespace StoreModels
         }
         }
 
-        public int Productid
+        public int? Productid
         {
         get{return productid;}
         set 

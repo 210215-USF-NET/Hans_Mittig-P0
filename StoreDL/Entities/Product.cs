@@ -9,7 +9,7 @@ namespace StoreDL.Entities
     {
         public Product()
         {
-            Carts = new HashSet<Cart>();
+            CartItems = new HashSet<CartItem>();
             Inventories = new HashSet<Inventory>();
             OrderItems = new HashSet<OrderItem>();
         }
@@ -19,7 +19,7 @@ namespace StoreDL.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
 
-        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual ICollection<CartItem> CartItems { get; set; }
         public virtual ICollection<Inventory> Inventories { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
     }

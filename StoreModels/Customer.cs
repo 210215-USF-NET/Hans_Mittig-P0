@@ -1,11 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace StoreModels
 {
     public class Customer
     {
+        public int customerid;
         private String customerName;
         private String customerPassword;
+
+        public int CustomerID
+        {
+            get { return customerid; }
+            set 
+            { 
+                if (value.Equals(null)) 
+                {
+                   throw new ArgumentNullException("ID cannot be null.");
+                }
+                customerid = value; 
+            }
+        }
+
         public String CustomerName
         {
         get{return customerName;}

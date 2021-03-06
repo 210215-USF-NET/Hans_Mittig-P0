@@ -17,9 +17,18 @@ namespace StoreDL
 
          Entity.Product ParseProducts(Model.Product products);
 
+         Model.Cart ParseCart(Entity.Cart cart);
+         Entity.Cart ParseCart(Model.Cart cart);
+
+         Model.CartItems ParseCartItems(Entity.CartItem cartitems);
+         Entity.CartItem ParseCartItems(Model.CartItems cartitems);
+
          Model.Orders ParseOrder(Entity.Order order);
 
          Entity.Order ParseOrder(Model.Orders order);
+
+         Model.OrderItems ParseOrderItems(Entity.OrderItem orderitems);
+         Entity.OrderItem ParseOrderItems(Model.OrderItems orderitems);
 
          Model.Manager ParseManager(Entity.Manager manager);
          Entity.Manager ParseManager(Model.Manager manager);
