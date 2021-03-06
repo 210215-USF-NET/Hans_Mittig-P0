@@ -94,6 +94,21 @@ namespace StoreDL
         {   return _context.Products.Select(x =>_mapper.ParseProducts(x)).ToList().Last(x => x.Name == product);
         }
 
+        public void AddToCart(Customer c, Location l, Product p, int q)
+        {
+            Cart newcart = new Cart();
+            newcart.CustomerID = c.customerid;
+            newcart.LocationID = l.Locationid;
+            newcart.Total +=  p.price * q;
+            AddCart(newcart);
+        }
+
+        public Model.Cart AddCart(Model.Cart c)
+        {
+            _context.Carts.Add(_mapper.ParseCart(c));
+            _context.SaveChanges();
+            return c;
+        }
         public List<Orders> AllOrders()
         {
             return _context.Orders.AsNoTracking().Select(x => _mapper.ParseOrder(x)).ToList();

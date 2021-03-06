@@ -1,4 +1,5 @@
 using StoreModels;
+using Model = StoreModels;
 using System.Collections.Generic;
 namespace StoreDL
 {
@@ -28,6 +29,9 @@ namespace StoreDL
 
          List<Orders> AllOrders();
 
+         public void AddToCart(Customer c, Location l, Product p, int q);
+
+        public Model.Cart AddCart(Model.Cart c);
          public Manager ManagerSignInName(string name);
          public Manager ManagerSignInPassword(string password);
 

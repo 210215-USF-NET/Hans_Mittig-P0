@@ -63,6 +63,13 @@ namespace StoreBL
             return _repo.SelectProduct(product);
         }
 
+        public void AddToCart(Customer c, Location l, Product p, int q)
+        {
+            _repo.AddToCart(c,l, p, q);
+        }
+
+        public void AddCart(Cart c)
+        { _repo.AddCart(c);}
         public void AddOrder(Orders order)
         {
             _repo.AddOrder(order);

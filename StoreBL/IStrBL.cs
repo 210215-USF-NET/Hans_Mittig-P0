@@ -28,6 +28,10 @@ namespace StoreBL
 
          Product SelectProduct(string product);
 
+         void AddToCart(Customer customer, Location l, Product product, int q);
+
+         void AddCart(Cart c);
+
          void AddOrder(Orders order);
 
          List<Orders> AllOrders();

@@ -32,6 +32,7 @@ namespace StoreDL
         {
             return new Model.Location
             {
+                Locationid = location.Id,
                 LocationName = location.Address
             };
         }

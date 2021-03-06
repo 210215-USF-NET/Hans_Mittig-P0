@@ -55,7 +55,8 @@ namespace StoreUI
         }
 
         public void PlaceOrder()
-        { 
+        { String inventoryname = "";
+          String productname = "";
           Inventory foundinv;
         Console.WriteLine("Please choose from the locations listed below:");
         foreach (var item in _strbl.ViewLoc())
@@ -70,7 +71,64 @@ namespace StoreUI
                 Console.WriteLine($"You have selected {foundloc.ToString()} as your location.");
                 Console.WriteLine("Please choose from the available types of products: ");
                 _strbl.ViewInventory(location);
-                //foundinv = _strbl.InventorySelect(inventoryname);
+                inventoryname = Console.ReadLine();
+                foundinv = _strbl.InventorySelect(inventoryname);
+                if(foundinv !=null)
+                    {
+                        Console.WriteLine($"You have selected {inventoryname}.");
+                        Console.WriteLine("Please choose from the products available");
+                        _strbl.ViewProducts(inventoryname, location);
+                        productname = Console.ReadLine();
+                        Product foundprod = _strbl.SelectProduct(productname);
+                        if(foundprod != null)
+                        {
+                            Console.WriteLine($"{productname} selected. How many would you like to buy?");
+                            int quantity = Convert.ToInt32(Console.ReadLine());
+                            if(quantity > 0)
+                            {
+                                Console.WriteLine($"You have selected {quantity} {foundprod.Name}(s). Would you like to add to your cart?");
+                                Boolean select = true;
+                                do{
+                                    string userInput = Console.ReadLine();
+                                    switch(userInput)
+                                    {
+                                    case "yes":
+                                    case "YES":
+                                    case "Yes":
+                                    case "YeS":
+                                    case "YEs":
+                                    case "yEs":
+                                    case "yES":
+                                    case "yeS":
+                                    _strbl.AddToCart(_customer, foundloc, foundprod, quantity);
+                                    select = false;
+                                    break;
+                                    case "no":
+                                    case "No":
+                                    case "nO":
+                                    case "NO":
+                                    select = false;
+                                    break;
+                                    default:
+                                    Console.WriteLine("Invalid input, please enter a proper value.");
+                                    break;
+                                    }
+                                }while(select);
+
+                                Console.WriteLine($"Checkout for {_customer.CustomerName}");
+                                
+                            }
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid product entered. Please input a valid product from the list.");
+                        }
+                    }
+                else
+                    {
+                        Console.WriteLine("Invalid product type.");
+                    }
             }
             else
             {
@@ -100,6 +158,12 @@ namespace StoreUI
                 }
             } return customerorderlist; */
         }
+
+        /* public void AddCart(Customer x, Location y, Product product, int q)
+        {
+            Cart newcart = _strbl.AddToCart(x, y,  product, q);
+
+        } */
 
     }
 }

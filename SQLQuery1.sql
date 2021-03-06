@@ -114,7 +114,9 @@ SELECT * FROM product;
 
 SELECT * FROM managers;
 
-SELECT * FROM orders;
+SELECT * FROM orders join customers on orders.customerid = customers.id;
+
+SELECT * FROM cart;
 
 SELECT * FROM inventory;
 
