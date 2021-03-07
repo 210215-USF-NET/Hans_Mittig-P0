@@ -94,6 +94,7 @@ namespace StoreDL
         public Model.Orders ParseOrder(Entity.Order order)
         {
             return new Model.Orders{
+                id = order.Id,
                 Total = order.Total,
                 Orderdate = order.Orderdate,
                 customerid = order.Customerid.Value,
@@ -164,7 +165,7 @@ namespace StoreDL
         public Entity.OrderItem ParseOrderItems(Model.OrderItems orderitems)
         {
             return new Entity.OrderItem{
-                Id = orderitems.id,
+                //Id = orderitems.id,
                 Orderid = orderitems.orderid,
                 Quantity = orderitems.quantity,
                 Productid = orderitems.productid

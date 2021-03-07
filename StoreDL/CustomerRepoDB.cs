@@ -168,5 +168,25 @@ namespace StoreDL
         {
             return _mapper.ParseCartItems(_context.CartItems.Where(y => y.Id == x).FirstOrDefault());
         }
+
+        public Orders GetOrder(int x)
+        {
+            return _mapper.ParseOrder(_context.Orders.Where(y => y.Id == x).FirstOrDefault());
+        }
+
+        public void AddOrderItems(Orders x, int y, Product p)
+        {
+            OrderItems order = new OrderItems();
+            order.orderid = x.id;
+            order.quantity = y;
+            order.productid = p.id;
+            AddOrderItemsToDatabase(order);
+        }
+
+        public void AddOrderItemsToDatabase(OrderItems order)
+        {
+            _context.OrderItems.Add(_mapper.ParseOrderItems(order));
+            _context.SaveChanges();
+        }
     }
 }

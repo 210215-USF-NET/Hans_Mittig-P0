@@ -120,5 +120,21 @@ namespace StoreBL
         {
             return _repo.GetProduct(x);
         }
+
+        public Orders GetOrder(int x)
+        {
+            return _repo.GetOrder(x);
+        }
+
+        public void AddOrderItems(Orders x, int y, Product p)
+        {
+             _repo.AddOrderItems(x, y, p);
+        }
+
+        public void AddOrderItemsToDatabase(OrderItems order)
+        {
+            _repo.AddOrderItemsToDatabase(order);
+        }
+
     }
 }

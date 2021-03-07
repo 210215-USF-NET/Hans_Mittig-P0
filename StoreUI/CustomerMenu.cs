@@ -22,7 +22,7 @@ namespace StoreUI
         {
             _strbl = _strBL;
             _customer = customer;
-            customerOrders = GetOrders(_strBL.AllOrders());
+            customerOrders = GetOrdersByCustomer(_strBL.AllOrders());
 
         }
          public void Start()
@@ -158,10 +158,14 @@ namespace StoreUI
             DateTime now = DateTime.Now;
             Console.WriteLine($"Purchase made on {now}.");
             _strbl.AddOrder(ttl, now, w, x);
-            //OrderItems neworderitems = _strbl.AddOrderItems(neworder, y, p);
+            Orders neworder = _strbl.GetOrder(w.customerid);
+            //Console.WriteLine($"ORDER id is {neworder.id}");
+            _strbl.AddOrderItems(neworder, y.quantity, p);
+
+            //OrderItems neworderitems
         }
 
-        public List<Orders> GetOrders(List<Orders> orders)
+        public List<Orders> GetOrdersByCustomer(List<Orders> orders)
         {
             List<Orders> customerorderlist = new List<Orders>();
             customerorderlist = orders.Select(O => O).Where(O => O.customerid == _customer.customerid).ToList();

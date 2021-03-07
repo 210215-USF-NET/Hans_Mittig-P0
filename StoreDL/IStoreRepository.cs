@@ -44,6 +44,9 @@ namespace StoreDL
          public Cart GetCart(int x);
          public CartItems GetCartItems(int x);
          public Product GetProduct(int x);
+         public Orders GetOrder(int x);
+         public void AddOrderItems(Orders x, int y, Product p);
 
+         public void AddOrderItemsToDatabase(OrderItems order);
     }
 }
