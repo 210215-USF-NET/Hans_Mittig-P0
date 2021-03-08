@@ -38,12 +38,14 @@ namespace StoreBL
 
          void AddCart(Cart c);
 
-        void AddOrder(decimal x, DateTime y, Customer c, Cart z);         
+        void AddOrder(decimal x, DateTime y, Customer c, Location l);         
         void AddOrderToDatabase(Orders order);
 
         public void AddOrderItems(Orders x, int y, Product p);
 
          List<Orders> AllOrders();
+
+         public List<OrderItems> AllOrderItems();
 
          public Cart GetCart(int x);
 
@@ -52,5 +54,10 @@ namespace StoreBL
          public Product GetProduct(int x);
 
          public Orders GetOrder(int x);
+
+         public OrderItems GetOrderByOrderID(int x);
+
+         public void DeleteCartItems(CartItems c);
+         public void DeleteCart(Cart c);
     }
 }

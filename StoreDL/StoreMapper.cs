@@ -145,8 +145,8 @@ namespace StoreDL
         public Entity.CartItem ParseCartItems(Model.CartItems cartitems)
         {
             return new Entity.CartItem{
-                //Id = cartitems.id,
-                Cartid = cartitems.cartid,
+                //Id = 5,
+                Cartid = (int)cartitems.cartid,
                 Productid = cartitems.productid,
                 Quantity = cartitems.quantity
             };

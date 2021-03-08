@@ -134,13 +134,18 @@ namespace StoreDL
             return _context.Orders.AsNoTracking().Select(x => _mapper.ParseOrder(x)).ToList();
         }
 
-        public void AddOrder(decimal x, DateTime y, Customer c, Cart z)
+        public List<OrderItems> AllOrderItems()
+        {
+            return _context.OrderItems.AsNoTracking().Select(x => _mapper.ParseOrderItems(x)).ToList();
+        }
+
+        public void AddOrder(decimal x, DateTime y, Customer c, Location l)
         {
             Orders order = new Orders();
             order.total = x;
             order.orderdate = y;
             order.customerid = c.customerid;
-            order.locationid = z.locationid;
+            order.locationid = l.locationID;
             AddOrderToDatabase(order);
         }
         public void AddOrderToDatabase(Orders order)
@@ -163,6 +168,12 @@ namespace StoreDL
         {
             return _mapper.ParseCart(_context.Carts.Where(y => y.Id == x).FirstOrDefault());
         }
+
+        public OrderItems GetOrderByOrderID(int x)
+        {
+            return _mapper.ParseOrderItems(_context.OrderItems.Where(y => y.Id == x).FirstOrDefault());
+        }
+
 
         public CartItems GetCartItems(int x)
         {
@@ -187,6 +198,20 @@ namespace StoreDL
         {
             _context.OrderItems.Add(_mapper.ParseOrderItems(order));
             _context.SaveChanges();
+        }
+
+        public CartItems DeleteCartItems(CartItems c)
+        {   _context.ChangeTracker.Clear();
+            _context.CartItems.RemoveRange(_mapper.ParseCartItems(c));
+            _context.SaveChanges();
+            return c;
+        }
+
+        public Cart DeleteCart(Cart c)
+        {   _context.ChangeTracker.Clear();
+            _context.Carts.Remove(_mapper.ParseCart(c));
+            _context.SaveChanges();
+            return c;
         }
     }
 }

@@ -23,9 +23,9 @@ namespace StoreUI
             Console.WriteLine("[1] Search for Customer");
             Console.WriteLine("[2] Customer Login");
             //Console.WriteLine("[3] View order history");
-            Console.WriteLine("[4] Manager Login");
+            Console.WriteLine("[3] Manager Login");
             //Console.WriteLine("[5] Replenish inventory (Manager only)");
-            Console.WriteLine("[6] Exit");
+            Console.WriteLine("[4] Exit");
 
             // get user input
             Console.WriteLine("Enter a number: ");
@@ -50,15 +50,9 @@ namespace StoreUI
                     CustomerLogin();
                     break;
                 case "3":
-                    ViewOrders();
+                    ManagerSignIn();
                     break;
                 case "4":
-                    ViewLocationOrders();
-                    break;
-                case "5":
-                    ReplenishInventory();
-                    break;
-                case "6":
                     stay = false;
                     ExitRemarks();
                     break;
@@ -103,7 +97,7 @@ namespace StoreUI
             }
         }
 
-         public string PickLocation()
+         /*public string PickLocation()
         {
             Console.WriteLine("Please select a location from the available options: ");
             foreach (var item in _strBL.ViewLoc())
@@ -123,12 +117,12 @@ namespace StoreUI
                 return null;
             }
 
-        } 
+        } */
 
-        public void ViewOrders()
+        /*public void ViewOrders()
         {
             Console.WriteLine("Sorry, this feature is not fully implemented yet!");
-        }
+        }*/
 
         /*public void PlaceOrder()
         {  
@@ -243,7 +237,7 @@ namespace StoreUI
             }
         }
 
-        public Boolean ManagerSignIn()
+        public void ManagerSignIn()
         {
             Console.WriteLine("Please enter a manager's full name: ");
             Manager found = _strBL.ManagerSignInName(Console.ReadLine());
@@ -255,18 +249,17 @@ namespace StoreUI
                 if(found2 != null)
                 {
                     Console.WriteLine("Login successful, please wait a moment...");
-                    return true;
+                    ManagerMenu menu = new ManagerMenu(_strBL);
+                    menu.Start();
                 }
                 else
                 {
                 Console.WriteLine("Sorry, the specified name and password do not match our records. Please try again.");
-                return false;
                 }
             }
             else
             {
                 Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
-                return false;
             }
         }
 

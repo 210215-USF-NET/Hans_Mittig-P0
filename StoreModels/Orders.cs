@@ -77,7 +77,7 @@ namespace StoreModels
 
         }
         }
-        public override string ToString() => $"${this.total}\t{this.orderdate}";
+        public override string ToString() => $"Total: ${this.total} Date: {this.orderdate}";
 
     }
 }

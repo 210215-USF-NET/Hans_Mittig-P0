@@ -8,7 +8,7 @@ namespace StoreDL.Entities
     public partial class CartItem
     {
         public int Id { get; set; }
-        public int? Cartid { get; set; }
+        public int Cartid { get; set; }
         public int? Productid { get; set; }
         public int Quantity { get; set; }
 

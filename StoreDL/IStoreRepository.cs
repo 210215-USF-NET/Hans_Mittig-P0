@@ -12,6 +12,8 @@ namespace StoreDL
 
          Customer GetCustomerName(string name);
 
+         public OrderItems GetOrderByOrderID(int x);
+
          Customer CustomerSignIn(string password);
 
          List<Location> ViewLoc();
@@ -26,11 +28,13 @@ namespace StoreDL
 
          Product SelectProduct(string product);
 
-         void AddOrder(decimal x, DateTime y, Customer c, Cart z);
+         void AddOrder(decimal x, DateTime y, Customer c, Location l);
 
          public void AddOrderToDatabase(Orders order);
 
          List<Orders> AllOrders();
+
+         public List<OrderItems> AllOrderItems();
 
          public void AddToCart(Customer c, Location l, Product p, int q);
 
@@ -48,5 +52,7 @@ namespace StoreDL
          public void AddOrderItems(Orders x, int y, Product p);
 
          public void AddOrderItemsToDatabase(OrderItems order);
+         public CartItems DeleteCartItems(CartItems c);
+         public Cart DeleteCart(Cart c);
     }
 }

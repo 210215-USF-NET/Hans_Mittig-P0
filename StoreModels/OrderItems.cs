@@ -60,6 +60,6 @@ namespace StoreModels
 
         }
         }
-
+        public override string ToString() => $"Product: ${this.id} Quantity: {this.quantity}";
     }
 }

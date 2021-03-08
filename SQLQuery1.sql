@@ -59,7 +59,7 @@ CREATE TABLE Cart
 CREATE TABLE CartItems
 ( 
 	id INT IDENTITY PRIMARY KEY,
-	cartid INT references Cart(id),
+	cartid INT references Cart(id) ON DELETE CASCADE,
 	productid INT REFERENCES Product(id),
 	quantity INT not null
 );

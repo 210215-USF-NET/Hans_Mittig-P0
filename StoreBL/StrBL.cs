@@ -82,9 +82,9 @@ namespace StoreBL
         {
             _repo.AddCartItems(c);
         }
-        public void AddOrder(decimal x, DateTime y, Customer c, Cart z)
+        public void AddOrder(decimal x, DateTime y, Customer c, Location l)
         {
-            _repo.AddOrder(x, y, c, z);
+            _repo.AddOrder(x, y, c, l);
         }
 
         public void AddOrderToDatabase(Orders order)
@@ -104,6 +104,11 @@ namespace StoreBL
         public List<Orders> AllOrders()
         {
             return _repo.AllOrders();
+        }
+
+        public List<OrderItems> AllOrderItems()
+        {
+            return _repo.AllOrderItems();
         }
 
         public Cart GetCart(int x)
@@ -126,6 +131,12 @@ namespace StoreBL
             return _repo.GetOrder(x);
         }
 
+        public OrderItems GetOrderByOrderID(int x)
+        {
+            return _repo.GetOrderByOrderID(x);
+        }
+
+
         public void AddOrderItems(Orders x, int y, Product p)
         {
              _repo.AddOrderItems(x, y, p);
@@ -136,5 +147,14 @@ namespace StoreBL
             _repo.AddOrderItemsToDatabase(order);
         }
 
+        public void DeleteCartItems(CartItems c)
+        {
+            _repo.DeleteCartItems(c);
+        }
+
+        public void DeleteCart(Cart c)
+        {
+            _repo.DeleteCart(c);
+        }
     }
 }

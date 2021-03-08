@@ -3,8 +3,8 @@ namespace StoreModels
 {
     public class Location
     {
-        private int locationID;
-        private string locationName;
+        public int locationID;
+        public string locationName;
 
         public int Locationid
         {

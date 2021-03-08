@@ -89,18 +89,21 @@ namespace StoreUI
                             int quantity = Convert.ToInt32(Console.ReadLine());
                             if(quantity > 0)
                             {
-                                Console.WriteLine($"You have selected {quantity} {foundprod.Name}(s). Would you like to add to your cart?");
+                                Console.WriteLine($"You have selected {quantity} {foundprod.Name}(s). Would you like to add to check out?");
                                 Boolean select = true;
                                 do{
                                     string userInput = Console.ReadLine();
                                     switch(userInput.ToUpper())
                                     {
                                     case "YES":
-                                    _strbl.AddToCart(_customer, foundloc, foundprod, quantity);
+                                   /*_strbl.AddToCart(_customer, foundloc, foundprod, quantity);
                                     Cart newcart =GetCart(_customer.CustomerID);
                                     _strbl.AddToCartItems(newcart, foundprod, quantity);
-                                    CartItems newcartitems = GetCartItems(newcart.id);
-                                    purchase(_customer, newcart, newcartitems);
+                                    CartItems newcartitems = GetCartItems(newcart.id);*/
+                                    purchase(_customer, foundloc, foundprod, quantity);
+                                    customerOrders = GetOrdersByCustomer(_strbl.AllOrders());
+                                    //_strbl.DeleteCartItems(newcartitems);
+                                    //_strbl.DeleteCart(newcart);
                                     select = false;
                                     break;
                                     case "NO":
@@ -111,7 +114,7 @@ namespace StoreUI
                                     break;
                                     }
                                 }while(select);
-                                Console.WriteLine("Thank you for your purchase!");
+                                Console.WriteLine("See you again!");
                             }
                             
                         }
@@ -134,9 +137,12 @@ namespace StoreUI
 
         public void OrderHistory(List<Orders> orders)
         {
-            foreach (Orders order in orders)
+                
+            foreach (var order in orders)
                 {
                     Console.WriteLine(order.ToString());
+                    //List<OrderItems> orderitems = _strbl.GetOrderByOrderID(order.id);
+                    //foreach(var orderitems in )
                  }
         }
 
@@ -150,8 +156,8 @@ namespace StoreUI
             return _strbl.GetCartItems(x);
         }
 
-        public void purchase(Customer w, Cart x, CartItems y)
-        {   Product p = GetProduct(w.customerid);
+        /*public void purchase(Customer w, Cart x, CartItems y, Product p)
+        {   
             Console.WriteLine($"Checkout for {w.CustomerName}");
             Console.WriteLine($"{y.quantity} {p.Name}(s)\t${x.total}");
             decimal ttl = x.total;
@@ -161,8 +167,19 @@ namespace StoreUI
             Orders neworder = _strbl.GetOrder(w.customerid);
             //Console.WriteLine($"ORDER id is {neworder.id}");
             _strbl.AddOrderItems(neworder, y.quantity, p);
+        }*/
 
-            //OrderItems neworderitems
+        public void purchase(Customer w, Location l, Product p, int quantity)
+        {   
+            decimal total = p.price * quantity;
+            Console.WriteLine($"Checkout for {w.CustomerName}");
+            Console.WriteLine($"{quantity} {p.Name}(s)\t${total}");
+            DateTime now = DateTime.Now;
+            Console.WriteLine($"Purchase made on {now}.");
+            _strbl.AddOrder(total, now, w, l);
+            Orders neworder = _strbl.GetOrder(w.customerid);
+            //Console.WriteLine($"ORDER id is {neworder.id}");
+            _strbl.AddOrderItems(neworder,quantity, p);
         }
 
         public List<Orders> GetOrdersByCustomer(List<Orders> orders)
