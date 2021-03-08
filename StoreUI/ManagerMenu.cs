@@ -35,6 +35,7 @@ namespace StoreUI
                 ViewOrdersByLocation();
                     break;
                 case "1":
+                ReplenishInventory();
                     break;
                 case "2":
                     stay = false;
@@ -88,5 +89,79 @@ namespace StoreUI
             customerorderlist = orders.Select(O => O).Where(O => O.locationid == x.Locationid).ToList();
             return customerorderlist;
         }
+
+        public void ReplenishInventory()
+        { String inventoryname = "";
+          String productname = "";
+          //Inventory foundinv;
+        Console.WriteLine("Please choose from the locations listed below:");
+        foreach (var item in _strbl.ViewLoc())
+            {
+                Console.WriteLine(item.ToString());
+            }
+            string location = "";
+            location = Console.ReadLine();
+            Location foundloc = _strbl.ChooseLoc(location);
+            if(foundloc != null)
+            {
+                Console.WriteLine($"You have selected {foundloc.ToString()} as your location.");
+                Console.WriteLine("Please choose from the available types of products: ");
+                _strbl.ViewInventory(location);
+                inventoryname = Console.ReadLine();
+                Inventory foundinv = _strbl.InventorySelect(inventoryname);
+                if(foundinv !=null)
+                    {
+                        Console.WriteLine($"You have selected {inventoryname}.");
+                        Console.WriteLine("Please choose from the products available");
+                        _strbl.ViewProducts(inventoryname, location);
+                        productname = Console.ReadLine();
+                        Product foundprod = _strbl.SelectProduct(productname);
+                        if(foundprod != null)
+                        {
+                            Console.WriteLine($"{productname} selected. How many items are you adding?");
+                            int quantity = Convert.ToInt32(Console.ReadLine());
+                            if(quantity > 0)
+                            {
+                                Console.WriteLine($"{foundinv.id}\t{foundinv.InventoryName}\t{foundinv.productid}\t{foundinv.quantity}");
+                               inventoryupdate((int)foundinv.locationid, (int)foundinv.productid, quantity);
+                            }
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid product entered. Please input a valid product from the list.");
+                        }
+                    }
+                else
+                    {
+                        Console.WriteLine("Invalid product type.");
+                    }
+            }
+            else
+            {
+                Console.WriteLine("Sorry, the specified location does not match our records. Please try again.");
+                location = null;
+            }
+        }
+
+        public void inventoryupdate(int l, int p, int q)
+        {
+            Inventory inv = new Inventory();
+            inv.quantity = _strbl.GetInventoryById(p,l).quantity + q;
+            _strbl.UpdateInventory(_strbl.GetInventoryById(p,l),inv);
+            Console.WriteLine($"Your new stock quantity is {inv.quantity}.");
+        }
+
+       /* public Inventory GetInventoryDetails(Inventory i, int x)
+        {
+            Inventory ii = new Inventory();
+            //i.id = 1;
+            ii.id = i.id;
+            ii.inventoryname = i.inventoryname;
+            ii.quantity = i.quantity + x;
+            ii.productid = i.productid;
+            ii.locationid = i.locationid;
+            return ii;
+        }*/
     }
 }

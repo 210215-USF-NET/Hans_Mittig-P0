@@ -1,12 +1,13 @@
 using StoreBL;
 using StoreModels;
 using System.Collections.Generic;
+using Serilog;
 using System;
 
 namespace StoreUI
 {
     public class StoreMenu : IMenu
-    {
+    { 
         private IStrBL _strBL;
         
         public StoreMenu(IStrBL strBL)
@@ -15,7 +16,11 @@ namespace StoreUI
         }
 
         public void Start()
-        {   Boolean stay = true;
+        {   Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Verbose()
+            .WriteTo.File("../logs.Json")
+            .CreateLogger();
+            Boolean stay = true;
             do{
                 // Menu options
             Console.WriteLine("Welcome to my electronics store. What would you like to do?");
@@ -44,19 +49,24 @@ namespace StoreUI
                     }
                     break;
                 case "1":
+                    Log.Information("User has selected to search by location.");
                     SearchCustomer();
                     break;
                 case "2":
+                    Log.Information("User has selected to log in as customer.");
                     CustomerLogin();
                     break;
                 case "3":
+                    Log.Information("User has selected to log in as manager");
                     ManagerSignIn();
                     break;
                 case "4":
+                    Log.Information("User has exited the application.");
                     stay = false;
                     ExitRemarks();
                     break;
                 default:
+                    Log.Error("User has entered invalid input.");
                     Console.WriteLine("Invalid input, please enter a proper value.");
                     break;
             }
@@ -96,116 +106,6 @@ namespace StoreUI
                 return false;
             }
         }
-
-         /*public string PickLocation()
-        {
-            Console.WriteLine("Please select a location from the available options: ");
-            foreach (var item in _strBL.ViewLoc())
-            {
-                Console.WriteLine(item.ToString());
-            }
-            string location = Console.ReadLine();
-            Location found = _strBL.ChooseLoc(location);
-            if(found != null)
-            {
-                Console.WriteLine($"You have selected {found.ToString()} as your location.");
-                return location;
-            }
-            else
-            {
-                Console.WriteLine("Sorry, the specified location does not match our records. Please try again.");
-                return null;
-            }
-
-        } */
-
-        /*public void ViewOrders()
-        {
-            Console.WriteLine("Sorry, this feature is not fully implemented yet!");
-        }*/
-
-        /*public void PlaceOrder()
-        {  
-            string name = "";
-            string location = "";
-            string inventoryname = "";
-            string productname ="";
-            int quantity = 0;
-            Console.WriteLine("Welcome to the Elecronics Store login system!");
-            Console.WriteLine("Please enter the full name you registered with: ");
-            name = Console.ReadLine();
-            Customer found = _strBL.GetCustomerName(name);
-            if(found != null)
-            {
-                Console.WriteLine(found.ToString());
-                Console.WriteLine("Please enter the associated password for your account: ");
-                Customer foundpass = _strBL.CustomerSignIn(Console.ReadLine());
-                if(foundpass != null)
-                {
-                    Console.WriteLine("Login successful, please wait a moment...");
-                    Console.WriteLine("Please select a location from the available options: ");
-            foreach (var item in _strBL.ViewLoc())
-            {
-                Console.WriteLine(item.ToString());
-            }
-            location = Console.ReadLine();
-            Location foundloc = _strBL.ChooseLoc(location);
-            if(found != null)
-            {
-                Console.WriteLine($"You have selected {foundloc.ToString()} as your location.");
-                Console.WriteLine("Please choose from the available types of products: ");
-                _strBL.ViewInventory(location);
-                inventoryname = Console.ReadLine();
-                Inventory foundinv = _strBL.InventorySelect(inventoryname);
-                if(foundinv !=null)
-                    {
-                        Console.WriteLine($"You have selected {inventoryname}.");
-                        Console.WriteLine("Please choose from the products available");
-                        _strBL.ViewProducts(inventoryname, location);
-                        productname = Console.ReadLine();
-                        Product foundprod = _strBL.SelectProduct(productname);
-                        if(foundprod != null)
-                        {
-                            Console.WriteLine($"{productname} selected. How many would you like to buy?");
-                            quantity = Convert.ToInt32(Console.ReadLine());
-                            if(quantity > 0)
-                            {
-                                Console.WriteLine($"Checkout for {name}");
-                                
-                            }
-                            
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid product entered. Please input a valid product from the list.");
-                            quantity = 0;
-        
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, the specified product does not exist.");
-                        inventoryname = null;
-                    }
-            }
-            else
-            {
-                Console.WriteLine("Sorry, the specified location does not match our records. Please try again.");
-                location = null;
-            }
-                }
-                else
-                {
-                    Console.WriteLine("Sorry, the specified name and password do not match our records. Please try again.");
-	            name = null;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Sorry, the specified name could not be found. Please try again.");
-                name = null;
-            }
-        }*/
 
         public void CustomerLogin()
         {   Console.WriteLine("Welcome to the Elecronics Store login system!");

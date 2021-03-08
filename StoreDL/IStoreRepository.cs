@@ -54,5 +54,9 @@ namespace StoreDL
          public void AddOrderItemsToDatabase(OrderItems order);
          public CartItems DeleteCartItems(CartItems c);
          public Cart DeleteCart(Cart c);
+
+         public void UpdateInventory(Inventory inv1);
+
+         public Inventory GetInventoryById(int prodId, int locId);
     }
 }

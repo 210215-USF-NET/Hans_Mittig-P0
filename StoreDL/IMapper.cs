@@ -13,6 +13,7 @@ namespace StoreDL
          Model.Inventory ParseInventory(Entity.Inventory inventory);
          Entity.Inventory ParseInventory(Model.Inventory inventory);
 
+
          Model.Product ParseProducts(Entity.Product products);
 
          Entity.Product ParseProducts(Model.Product products);

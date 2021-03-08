@@ -156,5 +156,17 @@ namespace StoreBL
         {
             _repo.DeleteCart(c);
         }
+
+        public void UpdateInventory(Inventory inv1, Inventory inv2)
+        {
+            inv1.Quantity = inv2.Quantity;
+            
+            _repo.UpdateInventory(inv1);
+        }
+
+        public Inventory GetInventoryById(int prodId, int locId)
+        {
+            return _repo.GetInventoryById(prodId,locId);
+        }
     }
 }

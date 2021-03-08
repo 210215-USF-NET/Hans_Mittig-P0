@@ -76,5 +76,17 @@ namespace StoreModels
         }
         }
 
+        public bool CheckQuantity(int q)
+        {
+            if(q < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
     }
 }

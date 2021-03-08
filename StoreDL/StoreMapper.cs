@@ -48,7 +48,7 @@ namespace StoreDL
         public Model.Inventory ParseInventory(Entity.Inventory inventory)
         {
             return new Model.Inventory
-            {
+            {   id = inventory.Id,
                 inventoryname = inventory.NameOfInventory,
                 quantity = inventory.Quantity,
                 productid = inventory.Productid,
@@ -56,10 +56,11 @@ namespace StoreDL
             };
         }
 
-        public Entity.Inventory ParseInventory(Model.Inventory inventory)
+        /* public Entity.Inventory ParseInventory(Model.Inventory inventory)
         {
             return new Entity.Inventory
             {
+                //Id = inventory.id,
                 NameOfInventory = inventory.inventoryname,
                 Quantity = inventory.quantity,
                 Productid = inventory.productid,
@@ -67,7 +68,7 @@ namespace StoreDL
 
 
             };
-        }
+        } */
 
         public Model.Product ParseProducts(Entity.Product products)
         {
@@ -187,6 +188,30 @@ namespace StoreDL
             {
                 Name = manager.ManagerName,
                 Password = manager.ManagerPassword
+            };
+        }
+
+        public Entity.Inventory ParseInventory(Model.Inventory inventory)
+        {
+            //when there are no inventories, NO id is set
+            if(inventory.Id == 0)
+            {
+                return new Entity.Inventory
+                {
+                    NameOfInventory = inventory.inventoryname,
+                    Quantity = inventory.quantity,
+                    Productid = inventory.productid,
+                    Locationid = inventory.locationid
+                };
+            }
+            //for updating and deleting
+            return new Entity.Inventory
+            {
+                Id = inventory.Id,
+                NameOfInventory = inventory.inventoryname,
+                Quantity = inventory.quantity,
+                Productid = inventory.productid,
+                Locationid = inventory.locationid
             };
         }
     }

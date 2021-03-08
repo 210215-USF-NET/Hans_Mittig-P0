@@ -59,5 +59,9 @@ namespace StoreBL
 
          public void DeleteCartItems(CartItems c);
          public void DeleteCart(Cart c);
+
+         public void UpdateInventory(Inventory inv1, Inventory inv2);
+
+         public Inventory GetInventoryById(int prodId, int locId);
     }
 }

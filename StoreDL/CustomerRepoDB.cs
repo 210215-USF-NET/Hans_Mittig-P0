@@ -74,6 +74,14 @@ namespace StoreDL
             return _context.Inventories.Select(x => _mapper.ParseInventory(x)).ToList().FirstOrDefault(x => x.InventoryName == inventory);
         }
 
+        public Inventory GetInventoryById(int prodId, int locId)
+        {
+            return _context.Inventories
+            .Select(x => _mapper.ParseInventory(x))
+            .ToList()
+            .FirstOrDefault(x => (x.productid == prodId && x.locationid == locId));
+        }
+
         public void ViewProducts(string invvalue, string locvalue)
         {   
             var queryProducts = (
@@ -213,6 +221,15 @@ namespace StoreDL
             _context.Carts.Remove(_mapper.ParseCart(c));
             _context.SaveChanges();
             return c;
+        }
+
+        public void UpdateInventory(Inventory inv1)
+        {
+            Entity.Inventory inv2 = _context.Inventories.Find(inv1.id); // put 1 just incase
+            _context.Entry(inv2).CurrentValues.SetValues(_mapper.ParseInventory(inv1));
+            _context.SaveChanges();
+            //This method clears the change tracker to drop all tracked entities
+            _context.ChangeTracker.Clear();
         }
     }
 }
