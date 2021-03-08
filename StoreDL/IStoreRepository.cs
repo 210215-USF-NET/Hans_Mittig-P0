@@ -12,7 +12,7 @@ namespace StoreDL
 
          Customer GetCustomerName(string name);
 
-         public OrderItems GetOrderByOrderID(int x);
+         public List<OrderItems> GetOrderByOrderID(int x);
 
          Customer CustomerSignIn(string password);
 

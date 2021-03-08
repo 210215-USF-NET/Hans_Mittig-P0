@@ -131,7 +131,7 @@ namespace StoreBL
             return _repo.GetOrder(x);
         }
 
-        public OrderItems GetOrderByOrderID(int x)
+        public List<OrderItems> GetOrderByOrderID(int x)
         {
             return _repo.GetOrderByOrderID(x);
         }

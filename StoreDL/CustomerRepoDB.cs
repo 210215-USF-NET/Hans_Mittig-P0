@@ -169,9 +169,10 @@ namespace StoreDL
             return _mapper.ParseCart(_context.Carts.Where(y => y.Id == x).FirstOrDefault());
         }
 
-        public OrderItems GetOrderByOrderID(int x)
+        public List<OrderItems> GetOrderByOrderID(int x)
         {
-            return _mapper.ParseOrderItems(_context.OrderItems.Where(y => y.Id == x).FirstOrDefault());
+            //return _mapper.ParseOrderItems(_context.OrderItems.Where(y => y.Id == x).FirstOrDefault());
+            return _context.OrderItems.AsNoTracking().Where(y => y.Orderid == x).Select(y => _mapper.ParseOrderItems(y)).ToList();
         }
 
 

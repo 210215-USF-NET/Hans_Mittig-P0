@@ -141,8 +141,11 @@ namespace StoreUI
             foreach (var order in orders)
                 {
                     Console.WriteLine(order.ToString());
-                    //List<OrderItems> orderitems = _strbl.GetOrderByOrderID(order.id);
-                    //foreach(var orderitems in )
+                    List<OrderItems> orderitems = _strbl.GetOrderByOrderID(order.id);
+                    foreach(var orderi in orderitems)
+                    {
+                        Console.WriteLine(orderi.ToString());
+                    }
                  }
         }
 

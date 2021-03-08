@@ -55,7 +55,7 @@ namespace StoreBL
 
          public Orders GetOrder(int x);
 
-         public OrderItems GetOrderByOrderID(int x);
+         public List<OrderItems> GetOrderByOrderID(int x);
 
          public void DeleteCartItems(CartItems c);
          public void DeleteCart(Cart c);
